@@ -129,7 +129,7 @@ def _max_numeric_roster_player_id() -> int:
         return mx
 
 def ensure_next_player_id() -> int:
-   """Ensure GAME_STATE has a monotonically increasing next_player_id counter."""
+    """Ensure GAME_STATE has a monotonically increasing next_player_id counter."""
     try:
         cur = GAME_STATE.get("next_player_id", None)
         if cur is None:
@@ -141,7 +141,7 @@ def ensure_next_player_id() -> int:
     return int(GAME_STATE["next_player_id"])
 
 def reserve_player_ids(count: int) -> int:
-   """Reserve a contiguous block of player IDs and return the first ID."""
+    """Reserve a contiguous block of player IDs and return the first ID."""
     if count <= 0:
         raise ValueError("count must be > 0")
     start = ensure_next_player_id()
