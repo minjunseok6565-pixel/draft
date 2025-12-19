@@ -760,7 +760,7 @@ def _next_player_id() -> int:
     Kept for compatibility inside this file; returns one unique player id.
     """
     return reserve_player_ids(1)
-        return mx + 1
+       
 
 
 def _season_id_from_date(d: Optional[str]) -> str:
