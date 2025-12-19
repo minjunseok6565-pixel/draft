@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 from config import (
     HARD_CAP,
     ALL_TEAM_IDS,
+    ROSTER_DF,
     TEAM_TO_CONF_DIV,
     SEASON_START_MONTH,
     SEASON_START_DAY,
@@ -18,11 +19,32 @@ from config import (
 # -------------------------------------------------------------------------
 # 1. 전역 GAME_STATE 및 스케줄/리그 상태 유틸
 # -------------------------------------------------------------------------
+
+def _compute_initial_next_player_id() -> int:
+    """ROSTER_DF를 기준으로 다음 PlayerID 시작값을 계산한다.
+
+    드래프트/신규 생성 로직은 GAME_STATE["next_player_id"]를 증가시키며 사용한다.
+    """
+    try:
+        if len(getattr(ROSTER_DF, "index", [])) == 0:
+            return 1
+        return int(max(ROSTER_DF.index)) + 1
+    except Exception:
+        mx = 0
+        for i in list(getattr(ROSTER_DF, "index", [])):
+            try:
+                mx = max(mx, int(i))
+            except Exception:
+                continue
+        return mx + 1
+
 GAME_STATE: Dict[str, Any] = {
     "schema_version": "1.1",
     "turn": 0,
     "games": [],  # 각 경기의 메타 데이터
     "player_stats": {},  # player_id -> 시즌 누적 스탯
+    # 신규 선수 생성(루키/FA 등) 시 PlayerID 충돌 방지를 위한 카운터
+    "next_player_id": _compute_initial_next_player_id(),
     "cached_views": {
         "scores": {
             "latest_date": None,
@@ -547,3 +569,4 @@ def get_schedule_summary() -> Dict[str, Any]:
         "status_counts": status_counts,
         "team_breakdown": team_breakdown,
     }
+
