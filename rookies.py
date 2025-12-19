@@ -34,6 +34,7 @@ from draft_state import (
     ATHLETICISM_SUB,
     ALL_SUB_RATINGS,
     ALL_RATING_COLS,
+    reserve_player_ids,
 )
 
 # ---------------------------------------------------------------------------
@@ -754,21 +755,11 @@ def get_public_prospect(prospect_id: int) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 def _next_player_id() -> int:
+    """(Deprecated) Use reserve_player_ids() instead.
+
+    Kept for compatibility inside this file; returns one unique player id.
     """
-    ROSTER_DF index를 player_id로 쓰는 기존 패턴에 맞춰 유일한 정수 id를 만든다.
-    """
-    try:
-        if len(ROSTER_DF.index) == 0:
-            return 1
-        return int(max(ROSTER_DF.index)) + 1
-    except Exception:
-        # index가 문자열 등으로 꼬였을 가능성 대비
-        mx = 0
-        for i in list(ROSTER_DF.index):
-            try:
-                mx = max(mx, int(i))
-            except Exception:
-                continue
+    return reserve_player_ids(1)
         return mx + 1
 
 
@@ -831,7 +822,7 @@ def initialize_rookie_class_if_needed(
     prospects: Dict[str, Any] = {}
     board: List[int] = []
 
-    base_pid = _next_player_id()  # roster와 id 충돌을 피하려면 별도 네임스페이스를 쓰는 게 더 안전하지만,
+    base_pid = reserve_player_ids(90)  # roster와 id 충돌을 피하려면 별도 네임스페이스(또는 uuid)가 더 안전하지만,
                                  # 현재 프로젝트는 DF index 기반이어서 여기서도 정수 id를 사용
     for i in range(90):
         pid = base_pid + i
