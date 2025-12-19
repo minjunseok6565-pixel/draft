@@ -1,8 +1,6 @@
 import os
 from typing import Any, Dict, List, Optional
 
-import os
-from typing import Any, Dict, List, Optional
 
 import pandas as pd
 
@@ -16,6 +14,38 @@ if not os.path.exists(ROSTER_PATH):
     raise RuntimeError(f"로스터 엑셀 파일을 찾을 수 없습니다: {ROSTER_PATH}")
 
 ROSTER_DF = pd.read_excel(ROSTER_PATH)
+
+# -------------------------------------------------------------------------
+# PlayerID / index 정리 (드래프트/로스터 추가 안정성)
+# -------------------------------------------------------------------------
+# 드래프트 로직은 ROSTER_DF.index 를 PlayerID로 사용한다.
+# 따라서 roster의 index를 PlayerID로 고정하고, PlayerID 컬럼도 유지한다.
+
+if "PlayerID" not in ROSTER_DF.columns:
+    # 로스터에 PlayerID가 없다면 1..N으로 생성 (최소 안전장치)
+    ROSTER_DF.insert(0, "PlayerID", range(1, len(ROSTER_DF) + 1))
+
+# PlayerID를 숫자로 강제 변환
+ROSTER_DF["PlayerID"] = pd.to_numeric(ROSTER_DF["PlayerID"], errors="coerce")
+if ROSTER_DF["PlayerID"].isna().any():
+    bad = ROSTER_DF[ROSTER_DF["PlayerID"].isna()]
+    raise RuntimeError(
+        "ROSTER_DF의 PlayerID에 숫자가 아닌 값이 있습니다. "
+        f"(예: {bad.head(3).to_dict(orient='records')})"
+    )
+
+# 중복 PlayerID는 치명적이므로 막는다
+if ROSTER_DF["PlayerID"].duplicated().any():
+    dup = ROSTER_DF[ROSTER_DF["PlayerID"].duplicated(keep=False)].sort_values("PlayerID")
+    raise RuntimeError(
+        "ROSTER_DF의 PlayerID가 중복됩니다. "
+        f"(예: {dup.head(6).to_dict(orient='records')})"
+    )
+
+ROSTER_DF["PlayerID"] = ROSTER_DF["PlayerID"].astype(int)
+
+# index를 PlayerID로 고정 (컬럼은 유지)
+ROSTER_DF.set_index("PlayerID", inplace=True, drop=False)
 
 # 샐러리 하드캡 (단위: 달러)
 HARD_CAP = 195_945_000.0  # US$ 195.945 million
@@ -77,3 +107,4 @@ SEASON_START_MONTH = 10  # 10월
 SEASON_START_DAY = 19
 SEASON_LENGTH_DAYS = 180  # 대략 6개월
 MAX_GAMES_PER_DAY = 8
+
