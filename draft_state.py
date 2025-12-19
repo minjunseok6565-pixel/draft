@@ -15,6 +15,7 @@ from datetime import datetime
 from typing import Any, Dict
 
 from state import GAME_STATE
+from config import ROSTER_DF
 
 # ---------------------------------------------------------------------------
 # 0) 능력치 스키마(컬럼 이름은 사용자가 정의한 형태를 그대로 사용)
@@ -102,6 +103,50 @@ BIO_FIELD_CANDIDATES = [
 
 ALL_SUB_RATINGS = OUTSIDE_SUB + INSIDE_SUB + PLAYMAKING_SUB + DEFENSE_SUB + REBOUNDING_SUB + ATHLETICISM_SUB
 ALL_RATING_COLS = GROUP_COLS + META_COLS + ALL_SUB_RATINGS
+
+
+# ---------------------------------------------------------------------------
+# PlayerID allocation (centralized)
+# ---------------------------------------------------------------------------
+
+def _max_numeric_roster_player_id() -> int:
+    """Find the current max numeric PlayerID from ROSTER_DF.index.
+
+    We keep this as a fallback initializer for GAME_STATE["next_player_id"].
+    """
+    try:
+        # Fast path if index is numeric-ish
+        if len(ROSTER_DF.index) == 0:
+            return 0
+        return int(max(ROSTER_DF.index))
+    except Exception:
+        mx = 0
+        for i in list(getattr(ROSTER_DF, "index", [])):
+            try:
+                mx = max(mx, int(i))
+            except Exception:
+                continue
+        return mx
+
+def ensure_next_player_id() -> int:
+   """Ensure GAME_STATE has a monotonically increasing next_player_id counter."""
+    try:
+        cur = GAME_STATE.get("next_player_id", None)
+        if cur is None:
+            GAME_STATE["next_player_id"] = _max_numeric_roster_player_id() + 1
+        else:
+            GAME_STATE["next_player_id"] = int(cur)
+    except Exception:
+        GAME_STATE["next_player_id"] = _max_numeric_roster_player_id() + 1
+    return int(GAME_STATE["next_player_id"])
+
+def reserve_player_ids(count: int) -> int:
+   """Reserve a contiguous block of player IDs and return the first ID."""
+    if count <= 0:
+        raise ValueError("count must be > 0")
+    start = ensure_next_player_id()
+    GAME_STATE["next_player_id"] = start + int(count)
+    return start
 
 
 # ---------------------------------------------------------------------------
