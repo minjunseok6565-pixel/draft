@@ -25,6 +25,7 @@ from draft_state import (
     _utc_iso,
     ALL_RATING_COLS,
     BIO_FIELD_CANDIDATES,
+    MIN_BASE_FIELDS,
 )
 
 from rookies import (
@@ -302,13 +303,9 @@ def make_pick(
     enforce_turn: bool = True,
 ) -> Dict[str, Any]:
     """
-    지정 팀(team_id)이 현재 픽 차례에 특정 루키(prospect_id)를 지명한다.
-    - enforce_turn=True면 현재 draft.current_pick_index가 가리키는 팀과 team_id가 일치해야 함.
-    지명되면:
-      1) prospect.drafted_by / draft_pick 설정
-      2) ROSTER_DF에 선수 편입(Team=team_id)
-      3) draft.picks 로그에 기록
-      4) current_pick_index 증가, 30픽 끝나면 completed 처리
+    안전장치:
+    - 중간에 에러가 나면(로스터 삽입 실패 등) 드래프트 상태가 '반쯤만' 적용되지 않도록
+      가능한 범위에서 롤백(되돌리기)한다.
     """
     draft = _ensure_draft_state()
     d = draft.get("draft", {})
@@ -318,6 +315,7 @@ def make_pick(
     if d.get("completed"):
         raise ValueError("Draft already completed.")
 
+    order = d["draft_order_round1"]
     pick_idx = int(d.get("current_pick_index", 0))
     if pick_idx < 0 or pick_idx >= 30:
         raise ValueError("Invalid pick index.")
@@ -331,19 +329,22 @@ def make_pick(
         raise KeyError(f"Prospect not found: {prospect_id}")
     if p.get("drafted_by"):
         raise ValueError("Prospect already drafted.")
+    if "true_ratings" not in p:
+        raise ValueError("Prospect missing true_ratings.")
 
-    # 지명 처리
+    
     pick_no = pick_idx + 1
-    p["drafted_by"] = team_id
-    p["draft_pick"] = pick_no
 
-    # 로스터 편입: true_ratings + 기본 정보
     true_r = p["true_ratings"]
 
     salary_amt = _rookie_salary_by_pick(pick_no)
     salary_str = _format_salary(salary_amt)
 
-    player_id = p["id"]
+    # rookies.py에서 이미 예약된 player_id를 사용
+    player_id = int(p["id"])
+    if player_id in list(getattr(ROSTER_DF, "index", [])):
+        raise ValueError(f"PlayerID collision: {player_id} already exists in roster.")
+
     player_row: Dict[str, Any] = {}
     player_row["PlayerID"] = player_id  # internal helper (insert uses it)
     player_row["Name"] = p["name"]
@@ -378,40 +379,121 @@ def make_pick(
         elif col == "Years Pro":
             player_row[col] = 0
 
-    # in-place 삽입
-    _add_player_to_roster_df_inplace(player_row)
+    # 필수 필드 검사(상업용 안전장치)
+    missing = [k for k in MIN_BASE_FIELDS if (k not in player_row or player_row.get(k) is None)]
+    if missing:
+        raise ValueError(f"Cannot add rookie to roster: missing required fields {missing}")
 
-    # GAME_STATE.players 메타에도 표시(선택)
-    players_meta = GAME_STATE.setdefault("players", {})
-    players_meta[str(player_id)] = {
-        "rookie": True,
-        "draft_season": draft.get("season_id"),
-        "draft_pick": pick_no,
-        "draft_team": team_id,
-        "created_at": _utc_iso(),
-    }
-
-    # 로그
-    d.setdefault("picks", [])
-    d["picks"].append({
+    pick_record = {
         "pick_no": pick_no,
         "team_id": team_id,
+        "player_id": player_id,
+        "name": p.get("name"),
+        "pos": p.get("pos"),
         "prospect_id": prospect_id,
         "ts": _utc_iso(),
-    })
+    }
 
-    # 다음 픽
-    d["current_pick_index"] = pick_idx + 1
-    if d["current_pick_index"] >= 30:
-        d["completed"] = True
-        d["completed_at"] = _utc_iso()
-        draft["phase"] = "draft_completed"
+    # --- Transaction-like apply with rollback ---
+    prev_phase = draft.get("phase")
+    prev_pick_index = d.get("current_pick_index")
+    prev_completed = d.get("completed")
+    prev_completed_at = d.get("completed_at")
+    prev_picks_len = len(d.get("picks", []) or [])
 
-    draft["draft"] = d
-    return get_public_prospect_board()
+    prev_drafted_by = p.get("drafted_by")
+    prev_draft_pick = p.get("draft_pick")
 
+    players_meta = GAME_STATE.setdefault("players", {})
+    had_player_meta = str(player_id) in players_meta
+    prev_player_meta = players_meta.get(str(player_id))
 
-def auto_pick_current_team(strategy: str = "best_true_ovr") -> Dict[str, Any]:
+    roster_inserted = False
+    try:
+        # 1) prospect mark drafted
+        p["drafted_by"] = team_id
+        p["draft_pick"] = pick_no
+
+        # 2) roster insert (가장 실패 가능성이 큼)
+        _add_player_to_roster_df_inplace(player_row)
+        roster_inserted = True
+
+        # 3) meta
+        players_meta[str(player_id)] = {
+            "rookie": True,
+            "draft_season": draft.get("season_id"),
+            "draft_pick": pick_no,
+            "draft_team": team_id,
+            "created_at": _utc_iso(),
+        }
+
+        # 4) log
+        d.setdefault("picks", [])
+        d["picks"].append(pick_record)
+
+        # 5) advance pick (commit)
+        d["current_pick_index"] = pick_idx + 1
+        if d["current_pick_index"] >= 30:
+            d["completed"] = True
+            d["completed_at"] = _utc_iso()
+            draft["phase"] = "draft_completed"
+
+        draft["draft"] = d
+        return get_public_prospect_board()
+
+    except Exception:
+        # rollback prospect fields
+        if prev_drafted_by is None:
+            p.pop("drafted_by", None)
+        else:
+            p["drafted_by"] = prev_drafted_by
+
+        if prev_draft_pick is None:
+            p.pop("draft_pick", None)
+        else:
+            p["draft_pick"] = prev_draft_pick
+
+        # rollback roster row if inserted
+        if roster_inserted:
+            try:
+                ROSTER_DF.drop(index=player_id, inplace=True, errors="ignore")
+            except Exception:
+                pass
+
+        # rollback players meta
+        if had_player_meta:
+            players_meta[str(player_id)] = prev_player_meta
+        else:
+            players_meta.pop(str(player_id), None)
+
+        # rollback picks list length
+        try:
+            if "picks" in d and isinstance(d["picks"], list):
+                d["picks"] = d["picks"][:prev_picks_len]
+        except Exception:
+            pass
+
+        # rollback pick cursor / completed flags / phase
+        if prev_pick_index is None:
+            d.pop("current_pick_index", None)
+        else:
+            d["current_pick_index"] = prev_pick_index
+
+        if prev_completed is None:
+            d.pop("completed", None)
+        else:
+            d["completed"] = prev_completed
+
+        if prev_completed_at is None:
+            d.pop("completed_at", None)
+        else:
+            d["completed_at"] = prev_completed_at
+
+        draft["phase"] = prev_phase
+        draft["draft"] = d
+        raise
+
+def auto_pick_current_team(strategy: str = "best_public") -> Dict[str, Any]:
     """
     AI 픽 자동 선택.
     - best_true_ovr: 남은 선수 중 true OVR 최대
