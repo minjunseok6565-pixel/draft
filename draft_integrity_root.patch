@@ -1,23 +1,22 @@
+diff --git a/draft_state.py b/draft_state.py
 --- a/draft_state.py
 +++ b/draft_state.py
-@@ -10,9 +10,9 @@
+@@ -12,7 +12,7 @@
+ """
+ 
  from datetime import datetime
 -from typing import Any, Dict
 +from typing import Any, Dict, List, Optional
  
  from state import GAME_STATE
  from config import ROSTER_DF
- 
-@@ -150,6 +150,226 @@
- def reserve_player_ids(count: int) -> int:
-     """Reserve a contiguous block of player IDs and return the first ID."""
-     if count <= 0:
-         raise ValueError("count must be > 0")
-     start = ensure_next_player_id()
-     GAME_STATE["next_player_id"] = start + int(count)
+@@ -149,6 +149,195 @@
      return start
  
  
++
++
++
 +# ---------------------------------------------------------------------------
 +# Integrity checks (draft/roster)
 +# ---------------------------------------------------------------------------
@@ -124,11 +123,10 @@
 +        drafted_by = p.get("drafted_by")
 +        draft_pick = p.get("draft_pick")
 +        if drafted_by:
-+            if not isinstance(draft_pick, int):
-+                try:
-+                    int(draft_pick)
-+                except Exception:
-+                    issues.append(f"Prospect {pid} drafted_by set but draft_pick invalid: {draft_pick}")
++            try:
++                int(draft_pick)
++            except Exception:
++                issues.append(f"Prospect {pid} drafted_by set but draft_pick invalid: {draft_pick}")
 +
 +    # Board should reference existing prospects
 +    if len(board) != len(set(board)):
@@ -161,7 +159,6 @@
 +        issues.append("draft.picks must be a list.")
 +        picks = []
 +
-+    # Pick log consistency (only when picks exist)
 +    for rec in picks:
 +        try:
 +            pick_no = int(rec.get("pick_no"))
@@ -178,22 +175,21 @@
 +            continue
 +
 +        if str(p.get("drafted_by")) != str(team_id):
-+            issues.append(f"Pick {pick_no}: prospect {prospect_id} drafted_by mismatch ({p.get('drafted_by')} vs {team_id})")
++            issues.append(
++                f"Pick {pick_no}: prospect {prospect_id} drafted_by mismatch ({p.get('drafted_by')} vs {team_id})"
++            )
 +
 +        if int(p.get("id")) != int(player_id):
 +            issues.append(f"Pick {pick_no}: player_id mismatch (prospect id {p.get('id')} vs record {player_id})")
 +
-+        # roster should contain the player
 +        try:
 +            if player_id not in df.index:
 +                issues.append(f"Pick {pick_no}: player_id {player_id} not found in roster index")
 +        except Exception:
 +            issues.append(f"Pick {pick_no}: could not verify roster contains player_id {player_id}")
 +
-+    # Roster schema checks
 +    issues.extend(validate_roster_integrity(df))
 +
-+    # next_player_id sanity (helpful even before save/load)
 +    try:
 +        nxt = int(GAME_STATE.get("next_player_id", 0) or 0)
 +        if len(df.index) > 0:
@@ -207,50 +203,50 @@
 +    if (not ok) and strict:
 +        raise DraftIntegrityError(stage=stage, issues=issues)
 +    return {"ok": ok, "issues": issues, "stage": stage}
-+
-+
  # ---------------------------------------------------------------------------
  # 1) Draft State Helpers
  # ---------------------------------------------------------------------------
- 
- def _ensure_draft_state() -> Dict[str, Any]:
-     """
-     GAME_STATE["draft"] 구조를 보장하고 반환한다.
+diff --git a/rookies.py b/rookies.py
 --- a/rookies.py
 +++ b/rookies.py
-@@ -33,6 +33,7 @@
+@@ -35,6 +35,7 @@
      ALL_SUB_RATINGS,
      ALL_RATING_COLS,
      reserve_player_ids,
 +    validate_draft_integrity,
  )
  
-@@ -906,7 +907,11 @@
+ # ---------------------------------------------------------------------------
+@@ -906,6 +907,8 @@
          "completed_at": None,
      }
  
-+    # Integrity check (development safety net)
-+    validate_draft_integrity(stage="after_initialize_rookie_class", strict=True)
+-    return get_public_prospect_board()
+-
+-
++        validate_draft_integrity(stage="after_initialize_rookie_class", strict=True)
 +
-     return get_public_prospect_board()
- 
- 
++return get_public_prospect_board()
++
++
+diff --git a/draft_flow.py b/draft_flow.py
 --- a/draft_flow.py
 +++ b/draft_flow.py
 @@ -26,6 +26,7 @@
-     _utc_iso,
      ALL_RATING_COLS,
      BIO_FIELD_CANDIDATES,
      MIN_BASE_FIELDS,
 +    validate_draft_integrity,
  )
  
+ from rookies import (
 @@ -237,6 +238,7 @@
      # draft.order도 같이 준비해두면 편함
      draft["draft"]["order"] = order[:30]
      draft["phase"] = "lottery_done"
 +    validate_draft_integrity(stage="after_lottery_done", strict=True)
      return get_public_prospect_board()
+ 
  
 @@ -259,6 +261,7 @@
      d["started_at"] = d.get("started_at") or _utc_iso()
@@ -259,10 +255,8 @@
 +    validate_draft_integrity(stage="after_start_draft", strict=True)
      return get_public_prospect_board()
  
-@@ -416,6 +419,7 @@
-         if d["current_pick_index"] >= 30:
-             d["completed"] = True
-             d["completed_at"] = _utc_iso()
+ 
+@@ -439,6 +442,7 @@
              draft["phase"] = "draft_completed"
  
          draft["draft"] = d
@@ -270,6 +264,3 @@
          return get_public_prospect_board()
  
      except Exception:
-         # rollback prospect fields
-         if prev_drafted_by is None:
-             p.pop("drafted_by", None)
