@@ -26,6 +26,7 @@ from draft_state import (
     ALL_RATING_COLS,
     BIO_FIELD_CANDIDATES,
     MIN_BASE_FIELDS,
+    validate_draft_integrity,
 )
 
 from rookies import (
@@ -237,6 +238,7 @@ def set_standings_and_run_lottery(
     # draft.order도 같이 준비해두면 편함
     draft["draft"]["order"] = order[:30]
     draft["phase"] = "lottery_done"
+    validate_draft_integrity(stage="after_lottery_done", strict=True)
     return get_public_prospect_board()
 
 
@@ -259,6 +261,7 @@ def start_draft_if_ready() -> Dict[str, Any]:
     d["started_at"] = d.get("started_at") or _utc_iso()
     d["completed"] = False
     draft["phase"] = "draft_in_progress"
+    validate_draft_integrity(stage="after_start_draft", strict=True)
     return get_public_prospect_board()
 
 
@@ -439,6 +442,7 @@ def make_pick(
             draft["phase"] = "draft_completed"
 
         draft["draft"] = d
+        validate_draft_integrity(stage=f"after_make_pick_{pick_no}", strict=True)
         return get_public_prospect_board()
 
     except Exception:

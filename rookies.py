@@ -35,6 +35,7 @@ from draft_state import (
     ALL_SUB_RATINGS,
     ALL_RATING_COLS,
     reserve_player_ids,
+    validate_draft_integrity,
 )
 
 # ---------------------------------------------------------------------------
@@ -906,6 +907,8 @@ def initialize_rookie_class_if_needed(
         "started_at": None,
         "completed_at": None,
     }
+
+    validate_draft_integrity(stage="after_initialize_rookie_class", strict=True)
 
     return get_public_prospect_board()
 

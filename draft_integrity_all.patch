@@ -10,7 +10,7 @@ diff --git a/draft_state.py b/draft_state.py
  
  from state import GAME_STATE
  from config import ROSTER_DF
-@@ -149,6 +149,195 @@
+@@ -149,6 +149,186 @@
      return start
  
  
@@ -43,19 +43,16 @@ diff --git a/draft_state.py b/draft_state.py
 +    df = roster_df if roster_df is not None else ROSTER_DF
 +    req = required_fields if required_fields is not None else MIN_BASE_FIELDS
 +
-+    # Required columns exist
 +    cols = list(getattr(df, "columns", []))
 +    for col in req:
 +        if col not in cols:
 +            issues.append(f"ROSTER_DF missing required column: {col}")
 +
-+    # PlayerID column/index sanity
 +    if "PlayerID" not in cols:
 +        issues.append("ROSTER_DF missing 'PlayerID' column (expected for draft inserts).")
 +        return issues
 +
 +    try:
-+        # index should match PlayerID (config.py sets index=PlayerID, drop=False)
 +        if len(df) > 0:
 +            sample = df.head(20)
 +            for idx, pid in zip(list(sample.index), list(sample["PlayerID"])):
@@ -85,13 +82,11 @@ diff --git a/draft_state.py b/draft_state.py
 +    ds = draft_state if draft_state is not None else _ensure_draft_state()
 +    df = roster_df if roster_df is not None else ROSTER_DF
 +
-+    # Phase sanity
 +    allowed_phases = {"idle", "class_generated", "lottery_done", "draft_in_progress", "draft_completed"}
 +    phase = ds.get("phase")
 +    if phase not in allowed_phases:
 +        issues.append(f"Invalid phase: {phase}")
 +
-+    # Prospects & board
 +    prospects = ds.get("prospects")
 +    board = ds.get("board")
 +    if not isinstance(prospects, dict):
@@ -101,7 +96,6 @@ diff --git a/draft_state.py b/draft_state.py
 +        issues.append("draft.board must be a list")
 +        board = []
 +
-+    # Prospect key/id consistency + uniqueness
 +    seen_ids = set()
 +    for k, p in prospects.items():
 +        try:
@@ -128,14 +122,12 @@ diff --git a/draft_state.py b/draft_state.py
 +            except Exception:
 +                issues.append(f"Prospect {pid} drafted_by set but draft_pick invalid: {draft_pick}")
 +
-+    # Board should reference existing prospects
 +    if len(board) != len(set(board)):
 +        issues.append("draft.board contains duplicate prospect ids.")
 +    for pid in board:
 +        if str(pid) not in prospects:
 +            issues.append(f"draft.board references missing prospect id: {pid}")
 +
-+    # Lottery & draft order
 +    lot = ds.get("lottery", {})
 +    order_round1 = lot.get("draft_order_round1", [])
 +    if order_round1 and (not isinstance(order_round1, list) or len(order_round1) < 30):
@@ -146,7 +138,6 @@ diff --git a/draft_state.py b/draft_state.py
 +    if order and (not isinstance(order, list) or len(order) != 30):
 +        issues.append("draft.order must be a list of length 30 when set.")
 +
-+    # Picks cursor invariants
 +    try:
 +        cur_idx = int(d.get("current_pick_index", 0))
 +        if cur_idx < 0 or cur_idx > 30:
@@ -217,18 +208,15 @@ diff --git a/rookies.py b/rookies.py
  )
  
  # ---------------------------------------------------------------------------
-@@ -906,6 +907,8 @@
+@@ -907,6 +908,8 @@
          "completed_at": None,
      }
  
--    return get_public_prospect_board()
--
--
-+        validate_draft_integrity(stage="after_initialize_rookie_class", strict=True)
++    validate_draft_integrity(stage="after_initialize_rookie_class", strict=True)
 +
-+return get_public_prospect_board()
-+
-+
+     return get_public_prospect_board()
+ 
+ 
 diff --git a/draft_flow.py b/draft_flow.py
 --- a/draft_flow.py
 +++ b/draft_flow.py
