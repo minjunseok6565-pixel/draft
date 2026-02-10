@@ -1,0 +1,74 @@
+
+
+변수: `{pid}`, `{points}`, `{assister_pid}`
+
+---
+
+## SHOT_RIM_DUNK (2개)
+
+* 기본: `{pid}가 림을 찍어 눌렀습니다! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}가 림을 찍어 눌렀습니다! {points}점!`
+
+## SHOT_RIM_LAYUP (2개)
+
+* 기본: `{pid}의 레이업이 들어갑니다! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}의 레이업이 들어갑니다! {points}점!`
+
+## SHOT_RIM_CONTACT (2개)
+
+* 기본: `{pid}가 컨택을 이겨내고 넣었습니다! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}가 컨택을 이겨내고 넣었습니다! {points}점!`
+
+## SHOT_TOUCH_FLOATER (2개)
+
+* 기본: `{pid}의 플로터가 톡 떨어집니다! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}의 플로터가 톡 떨어집니다! {points}점!`
+
+## SHOT_POST (2개)
+
+* 기본: `{pid}가 포스트에서 해결합니다! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}가 포스트에서 해결합니다! {points}점!`
+
+---
+
+## SHOT_MID_PU (4개)
+
+* 기본: `{pid} 미드레인지 풀업 점퍼! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지 풀업 점퍼! {points}점!`
+* 존: `{pid} 미드레인지에서 풀업 점퍼! {points}점!`
+* 존+어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지에서 풀업 점퍼! {points}점!`
+
+## SHOT_MID_CS (4개)
+
+* 기본: `{pid} 미드레인지 캐치앤슛! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지 캐치앤슛! {points}점!`
+* 존: `{pid} 미드레인지에서 캐치앤슛! {points}점!`
+* 존+어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지에서 캐치앤슛! {points}점!`
+
+---
+
+## SHOT_3_CS (4개)
+
+* 기본: `{pid} 캐치앤슛 3점! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid} 캐치앤슛 3점! {points}점!`
+* 존:
+
+  * (Corner_3) `{pid} 코너 3점 캐치앤슛! {points}점!`
+  * (ATB_3) `{pid} 탑 3점 캐치앤슛! {points}점!`
+* 존+어시스트:
+
+  * (Corner_3) `{assister_pid}의 어시스트, {pid} 코너 3점 캐치앤슛! {points}점!`
+  * (ATB_3) `{assister_pid}의 어시스트, {pid} 탑 3점 캐치앤슛! {points}점!`
+
+## SHOT_3_OD (4개)
+
+* 기본: `{pid}가 스스로 만들어낸 3점! {points}점!`
+* 어시스트: `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 3점! {points}점!`
+* 존:
+
+  * (Corner_3) `{pid}가 스스로 만들어낸 코너 3점! {points}점!`
+  * (ATB_3) `{pid}가 스스로 만들어낸 탑 3점! {points}점!`
+* 존+어시스트:
+
+  * (Corner_3) `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 코너 3점! {points}점!`
+  * (ATB_3) `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 탑 3점! {points}점!`
