@@ -1,9 +1,4 @@
 
-
-변수: `{pid}`, `{points}`, `{assister_pid}`
-
----
-
 ## SHOT_RIM_DUNK (2개)
 
 * 기본: `{pid}가 림을 찍어 눌렀습니다! {points}점!`
