@@ -1,1 +1,7 @@
-교체: “{team_id}가 교체를 가져갑니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어옵니다!”
+  "SUBSTITUTION": [
+    "교체 들어갑니다: {team_id}, {sub_out_pids}가 벤치로 가고 {sub_in_pids}가 투입!",
+    "{team_id} 로테이션 가동! {sub_out_pids} OUT, {sub_in_pids} IN!",
+    "선수 교체! {team_id}에서 {sub_out_pids}가 빠지고 {sub_in_pids}가 들어옵니다!",
+    "{team_id}가 변화를 줍니다—{sub_out_pids} 교체 아웃, {sub_in_pids} 투입!",
+    "교체 콜! {team_id}: {sub_out_pids} 나가고 {sub_in_pids} 들어가요!"
+  ],
