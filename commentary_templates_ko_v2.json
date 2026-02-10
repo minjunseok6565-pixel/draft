@@ -1,0 +1,1497 @@
+{
+  "schema": "match_engine_commentary_templates_v1",
+  "locale": "ko-KR",
+  "groups": {
+    "SCORE::SHOT_RIM_DUNK": {
+      "templates": [
+        {
+          "text": "{pid}가 림을 찍어 눌렀습니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_RIM_DUNK"
+      }
+    },
+    "SCORE::SHOT_RIM_DUNK::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 림을 찍어 눌렀습니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_RIM_DUNK::ASSIST"
+      }
+    },
+    "SCORE::SHOT_RIM_LAYUP": {
+      "templates": [
+        {
+          "text": "{pid}의 레이업이 들어갑니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_RIM_LAYUP"
+      }
+    },
+    "SCORE::SHOT_RIM_LAYUP::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}의 레이업이 들어갑니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_RIM_LAYUP::ASSIST"
+      }
+    },
+    "SCORE::SHOT_RIM_CONTACT": {
+      "templates": [
+        {
+          "text": "{pid}가 컨택을 이겨내고 넣었습니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_RIM_CONTACT"
+      }
+    },
+    "SCORE::SHOT_RIM_CONTACT::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 컨택을 이겨내고 넣었습니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_RIM_CONTACT::ASSIST"
+      }
+    },
+    "SCORE::SHOT_TOUCH_FLOATER": {
+      "templates": [
+        {
+          "text": "{pid}의 플로터가 톡 떨어집니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_TOUCH_FLOATER"
+      }
+    },
+    "SCORE::SHOT_TOUCH_FLOATER::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}의 플로터가 톡 떨어집니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_TOUCH_FLOATER::ASSIST"
+      }
+    },
+    "SCORE::SHOT_POST": {
+      "templates": [
+        {
+          "text": "{pid}가 포스트에서 해결합니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_POST"
+      }
+    },
+    "SCORE::SHOT_POST::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 포스트에서 해결합니다! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_POST::ASSIST"
+      }
+    },
+    "SCORE::SHOT_MID_PU": {
+      "templates": [
+        {
+          "text": "{pid} 미드레인지 풀업 점퍼! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_MID_PU"
+      }
+    },
+    "SCORE::SHOT_MID_PU::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid} 미드레인지 풀업 점퍼! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_MID_PU::ASSIST"
+      }
+    },
+    "SCORE::SHOT_MID_CS": {
+      "templates": [
+        {
+          "text": "{pid} 미드레인지 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_MID_CS"
+      }
+    },
+    "SCORE::SHOT_MID_CS::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid} 미드레인지 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_MID_CS::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_CS": {
+      "templates": [
+        {
+          "text": "{pid} 캐치앤슛 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_3_CS"
+      }
+    },
+    "SCORE::SHOT_3_CS::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid} 캐치앤슛 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_3_CS::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_CS::ZONE=Corner_3": {
+      "templates": [
+        {
+          "text": "{pid} 코너 3점 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 61,
+        "ttl_ms": 1650,
+        "cooldown_tag": "SCORE::SHOT_3_CS::ZONE=Corner_3"
+      }
+    },
+    "SCORE::SHOT_3_CS::ZONE=ATB_3": {
+      "templates": [
+        {
+          "text": "{pid} 탑 3점 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 61,
+        "ttl_ms": 1650,
+        "cooldown_tag": "SCORE::SHOT_3_CS::ZONE=ATB_3"
+      }
+    },
+    "SCORE::SHOT_3_CS::ZONE=Corner_3::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid} 코너 3점 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 63,
+        "ttl_ms": 1750,
+        "cooldown_tag": "SCORE::SHOT_3_CS::ZONE=Corner_3::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_CS::ZONE=ATB_3::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid} 탑 3점 캐치앤슛! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 63,
+        "ttl_ms": 1750,
+        "cooldown_tag": "SCORE::SHOT_3_CS::ZONE=ATB_3::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_OD": {
+      "templates": [
+        {
+          "text": "{pid}가 스스로 만들어낸 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "SCORE::SHOT_3_OD"
+      }
+    },
+    "SCORE::SHOT_3_OD::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 62,
+        "ttl_ms": 1700,
+        "cooldown_tag": "SCORE::SHOT_3_OD::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_OD::ZONE=Corner_3": {
+      "templates": [
+        {
+          "text": "{pid}가 스스로 만들어낸 코너 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 61,
+        "ttl_ms": 1650,
+        "cooldown_tag": "SCORE::SHOT_3_OD::ZONE=Corner_3"
+      }
+    },
+    "SCORE::SHOT_3_OD::ZONE=ATB_3": {
+      "templates": [
+        {
+          "text": "{pid}가 스스로 만들어낸 탑 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 61,
+        "ttl_ms": 1650,
+        "cooldown_tag": "SCORE::SHOT_3_OD::ZONE=ATB_3"
+      }
+    },
+    "SCORE::SHOT_3_OD::ZONE=Corner_3::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 코너 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 63,
+        "ttl_ms": 1750,
+        "cooldown_tag": "SCORE::SHOT_3_OD::ZONE=Corner_3::ASSIST"
+      }
+    },
+    "SCORE::SHOT_3_OD::ZONE=ATB_3::ASSIST": {
+      "templates": [
+        {
+          "text": "{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 탑 3점! {points}점!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 63,
+        "ttl_ms": 1750,
+        "cooldown_tag": "SCORE::SHOT_3_OD::ZONE=ATB_3::ASSIST"
+      }
+    },
+    "MISS::SHOT_RIM_DUNK::MISS": {
+      "templates": [
+        {
+          "text": "`{pid}`의 덩크 시도! 림을 때리고 튕겨 나옵니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_DUNK::MISS"
+      }
+    },
+    "MISS::SHOT_RIM_DUNK::BLOCK_INPLAY": {
+      "templates": [
+        {
+          "text": "`{pid}` 덩크로 올라갑니다! `{blocker_pid}`가 위에서 쳐내며 블록! 공은 살아있습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_DUNK::BLOCK_INPLAY"
+      }
+    },
+    "MISS::SHOT_RIM_DUNK::BLOCK_OOB": {
+      "templates": [
+        {
+          "text": "`{pid}` 덩크 시도! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_DUNK::BLOCK_OOB"
+      }
+    },
+    "MISS::SHOT_RIM_LAYUP::MISS": {
+      "templates": [
+        {
+          "text": "`{pid}`의 레이업! 살짝 빗나갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_LAYUP::MISS"
+      }
+    },
+    "MISS::SHOT_RIM_LAYUP::BLOCK_INPLAY": {
+      "templates": [
+        {
+          "text": "`{pid}` 레이업으로 마무리! `{blocker_pid}`가 손끝으로 쳐내며 블록! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_LAYUP::BLOCK_INPLAY"
+      }
+    },
+    "MISS::SHOT_RIM_LAYUP::BLOCK_OOB": {
+      "templates": [
+        {
+          "text": "`{pid}` 레이업 시도! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_LAYUP::BLOCK_OOB"
+      }
+    },
+    "MISS::SHOT_RIM_CONTACT::MISS": {
+      "templates": [
+        {
+          "text": "`{pid}` 접촉을 버티고 올렸지만 마무리가 안 됩니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_CONTACT::MISS"
+      }
+    },
+    "MISS::SHOT_RIM_CONTACT::BLOCK_INPLAY": {
+      "templates": [
+        {
+          "text": "`{pid}` 몸싸움 속 슛! `{blocker_pid}`가 끝까지 따라와 블록! 공은 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_CONTACT::BLOCK_INPLAY"
+      }
+    },
+    "MISS::SHOT_RIM_CONTACT::BLOCK_OOB": {
+      "templates": [
+        {
+          "text": "`{pid}` 컨택 속 마무리! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_RIM_CONTACT::BLOCK_OOB"
+      }
+    },
+    "MISS::SHOT_TOUCH_FLOATER::MISS": {
+      "templates": [
+        {
+          "text": "`{pid}`의 플로터! 터치가 조금 길었습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_TOUCH_FLOATER::MISS"
+      }
+    },
+    "MISS::SHOT_TOUCH_FLOATER::BLOCK_INPLAY": {
+      "templates": [
+        {
+          "text": "`{pid}` 플로터로 띄웁니다! `{blocker_pid}`가 손끝으로 쳐내요! 공은 살아있어요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_TOUCH_FLOATER::BLOCK_INPLAY"
+      }
+    },
+    "MISS::SHOT_TOUCH_FLOATER::BLOCK_OOB": {
+      "templates": [
+        {
+          "text": "`{pid}` 플로터 시도! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_TOUCH_FLOATER::BLOCK_OOB"
+      }
+    },
+    "MISS::SHOT_POST::MISS": {
+      "templates": [
+        {
+          "text": "`{pid}` 포스트에서 돌아서 마무리! 림이 허락하지 않네요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_POST::MISS"
+      }
+    },
+    "MISS::SHOT_POST::BLOCK_INPLAY": {
+      "templates": [
+        {
+          "text": "`{pid}` 포스트 슛으로 마무리! `{blocker_pid}`가 위에서 찍어 눌러 블록! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_POST::BLOCK_INPLAY"
+      }
+    },
+    "MISS::SHOT_POST::BLOCK_OOB": {
+      "templates": [
+        {
+          "text": "`{pid}` 포스트 훅 시도! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_POST::BLOCK_OOB"
+      }
+    },
+    "MISS::SHOT_MID_PU::MISS::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지 풀업 점퍼! 림을 맞고 빠집니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::MISS::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_PU::MISS::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 풀업 점퍼! 림을 맞고 빠집니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::MISS::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지 풀업! `{blocker_pid}`가 타이밍 맞춰 쳐냈습니다! 공은 살아있습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 풀업으로 올라갑니다! `{blocker_pid}`가 쳐냈습니다! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_MID_PU::BLOCK_OOB::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지 풀업! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::BLOCK_OOB::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_PU::BLOCK_OOB::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 풀업 점퍼 시도! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_PU::BLOCK_OOB::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_MID_CS::MISS::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지 캐치 앤 슛! 아쉽게 빗나갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::MISS::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_CS::MISS::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 받아서 바로 던집니다! 아쉽게 빗나갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::MISS::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지에서 바로 던집니다! `{blocker_pid}`가 릴리즈를 읽고 블록! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 곧바로 점퍼! `{blocker_pid}`가 읽고 쳐냈습니다! 공은 살아있어요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_MID_CS::BLOCK_OOB::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 미드레인지 캐치 앤 슛! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::BLOCK_OOB::ZM=Z"
+      }
+    },
+    "MISS::SHOT_MID_CS::BLOCK_OOB::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛! `{blocker_pid}`가 막아냈고 아웃 오브 바운즈! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_MID_CS::BLOCK_OOB::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너 3점 캐치 앤 슛! 림을 외면합니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! 아쉽게 빗나갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너에서 캐치 앤 슛 3점! `{blocker_pid}`가 클로즈아웃으로 쳐냈습니다! 공은 살아있어요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너 3점 캐치 앤 슛! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑 3점 캐치 앤 슛! 아쉽게 빗나갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! 림을 외면합니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑에서 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 공은 살아있습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너에서 드리블 3점! 짧았습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블에서 바로 3점! 짧았습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너 드리블 3점으로 올라갑니다! `{blocker_pid}`가 끝까지 따라와 블록! 공은 살아있습니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블 3점 시도! `{blocker_pid}`가 쳐냈습니다! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 코너 드리블 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑에서 드리블 3점! 림을 맞고 나옵니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블에서 바로 3점! 림을 외면합니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑 드리블 3점! `{blocker_pid}`가 쳐냈습니다! 공은 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블 3점으로 올라갑니다! `{blocker_pid}`가 쳐냈습니다! 인플레이!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z": {
+      "templates": [
+        {
+          "text": "`{pid}` 윙/탑 드리블 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z"
+      }
+    },
+    "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ": {
+      "templates": [
+        {
+          "text": "`{pid}` 드리블 3점! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1500,
+        "cooldown_tag": "MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ"
+      }
+    },
+    "REB::ORB": {
+      "templates": [
+        {
+          "text": "{pid} 가 공격 리바운드를 따냅니다",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 45,
+        "ttl_ms": 1200,
+        "cooldown_tag": "REB::ORB"
+      }
+    },
+    "REB::DRB": {
+      "templates": [
+        {
+          "text": "{pid} 가 수비 리바운드를 따냅니다",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 40,
+        "ttl_ms": 1100,
+        "cooldown_tag": "REB::DRB"
+      }
+    },
+    "TO::TO_SHOT_CLOCK": {
+      "templates": [
+        {
+          "text": "샷클락이 울립니다! {handler}가 시간을 다 써버리면서 공격권이 넘어가요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 65,
+        "ttl_ms": 1700,
+        "cooldown_tag": "TO::TO_SHOT_CLOCK"
+      }
+    },
+    "TO::TO_HANDLE_LOSS::STEAL": {
+      "templates": [
+        {
+          "text": "{handler}가 볼을 흘렸고, {stealer}가 낚아채며 바로 턴오버!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 70,
+        "ttl_ms": 1800,
+        "cooldown_tag": "TO::TO_HANDLE_LOSS::STEAL"
+      }
+    },
+    "TO::TO_HANDLE_LOSS::LINEOUT_LOOSE": {
+      "templates": [
+        {
+          "text": "{handler}가 공을 흘렸는데 그대로 라인 밖! 루즈볼 라인아웃 턴오버입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "TO::TO_HANDLE_LOSS::LINEOUT_LOOSE"
+      }
+    },
+    "TO::TO_HANDLE_LOSS::LIVE": {
+      "templates": [
+        {
+          "text": "{handler}가 혼자 공을 놓치면서 상대에게 그대로 넘어갑니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 58,
+        "ttl_ms": 1550,
+        "cooldown_tag": "TO::TO_HANDLE_LOSS::LIVE"
+      }
+    },
+    "TO::TO_BAD_PASS::STEAL": {
+      "templates": [
+        {
+          "text": "{passer}의 패스가 읽혔어요! {stealer}가 가로채며 패스미스 턴오버!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 70,
+        "ttl_ms": 1800,
+        "cooldown_tag": "TO::TO_BAD_PASS::STEAL"
+      }
+    },
+    "TO::TO_BAD_PASS::LINEOUT_BAD_PASS": {
+      "templates": [
+        {
+          "text": "{passer}의 패스가 너무 길었습니다—라인 밖으로 나가며 턴오버!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1600,
+        "cooldown_tag": "TO::TO_BAD_PASS::LINEOUT_BAD_PASS"
+      }
+    },
+    "TO::TO_BAD_PASS::LIVE": {
+      "templates": [
+        {
+          "text": "{passer}의 패스가 어긋났고, 상대가 주워 담으면서 공격권이 바뀝니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 58,
+        "ttl_ms": 1550,
+        "cooldown_tag": "TO::TO_BAD_PASS::LIVE"
+      }
+    },
+    "OFF_FOUL::CHARGE": {
+      "templates": [
+        {
+          "text": "공격자 파울! {fouler}가 무리하게 밀고 들어가다 파울을 범합니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 66,
+        "ttl_ms": 1700,
+        "cooldown_tag": "OFF_FOUL::CHARGE"
+      }
+    },
+    "FOUL_NO_SHOTS::FOUL_REACH_TRAP": {
+      "templates": [
+        {
+          "text": "수비자 반칙입니다! {fouler}가 {pid}를 제지하는 과정에서 파울을 범했어요!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 50,
+        "ttl_ms": 1400,
+        "cooldown_tag": "FOUL_NO_SHOTS::FOUL_REACH_TRAP"
+      }
+    },
+    "FT::SHOT_RIM_DUNK::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 덩크 시도! 파울까지 뚫고 넣었습니다—{fouler}의 반칙, 앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_RIM_DUNK::AND1"
+      }
+    },
+    "FT::SHOT_RIM_DUNK::2FT": {
+      "templates": [
+        {
+          "text": "{pid}가 덩크로 올라갔는데 파울! {fouler}가 찍었고 자유투 2개입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_RIM_DUNK::2FT"
+      }
+    },
+    "FT::SHOT_RIM_LAYUP::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 레이업! {fouler}가 몸을 건드렸지만 득점 성공—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_RIM_LAYUP::AND1"
+      }
+    },
+    "FT::SHOT_RIM_LAYUP::2FT": {
+      "templates": [
+        {
+          "text": "{pid}의 레이업 시도에 파울! {fouler}의 반칙으로 자유투 2개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_RIM_LAYUP::2FT"
+      }
+    },
+    "FT::SHOT_RIM_CONTACT::AND1": {
+      "templates": [
+        {
+          "text": "{pid}가 컨택 받으면서 골밑 마무리! {fouler}가 파울, 득점 인정에 앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_RIM_CONTACT::AND1"
+      }
+    },
+    "FT::SHOT_RIM_CONTACT::2FT": {
+      "templates": [
+        {
+          "text": "{pid}의 골밑 컨택 슛에 파울! {fouler}가 걸었고 자유투 2개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_RIM_CONTACT::2FT"
+      }
+    },
+    "FT::SHOT_TOUCH_FLOATER::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 터치 플로터! {fouler}의 파울에도 공이 떨어집니다—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_TOUCH_FLOATER::AND1"
+      }
+    },
+    "FT::SHOT_TOUCH_FLOATER::2FT": {
+      "templates": [
+        {
+          "text": "{pid}가 플로터를 띄웠는데 파울! {fouler}가 건드렸고 자유투 2개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_TOUCH_FLOATER::2FT"
+      }
+    },
+    "FT::SHOT_POST::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 포스트업 슛! {fouler}가 손을 탔지만 득점까지—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_POST::AND1"
+      }
+    },
+    "FT::SHOT_POST::2FT": {
+      "templates": [
+        {
+          "text": "{pid}의 포스트업에서 파울! {fouler}의 반칙, 자유투 2개입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_POST::2FT"
+      }
+    },
+    "FT::SHOT_MID_PU::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 미드레인지 풀업! {fouler}가 파울을 범했지만 슛은 꽂힙니다—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_MID_PU::AND1"
+      }
+    },
+    "FT::SHOT_MID_PU::2FT": {
+      "templates": [
+        {
+          "text": "{pid}가 풀업 점퍼를 올렸는데 파울! {fouler}의 반칙으로 자유투 2개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_MID_PU::2FT"
+      }
+    },
+    "FT::SHOT_MID_CS::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 미드레인지 캐치앤슛! {fouler}가 붙었지만 득점 성공—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_MID_CS::AND1"
+      }
+    },
+    "FT::SHOT_MID_CS::2FT": {
+      "templates": [
+        {
+          "text": "{pid}의 캐치앤슛에 파울! {fouler}가 따라붙었고 자유투 2개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 60,
+        "ttl_ms": 1700,
+        "cooldown_tag": "FT::SHOT_MID_CS::2FT"
+      }
+    },
+    "FT::SHOT_3_CS::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 3점 캐치앤슛! {fouler}가 파울까지—그래도 들어갔습니다, 앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_3_CS::AND1"
+      }
+    },
+    "FT::SHOT_3_CS::3FT": {
+      "templates": [
+        {
+          "text": "{pid}가 3점을 던지는 순간 파울! {fouler}의 반칙, 자유투 3개입니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 64,
+        "ttl_ms": 1750,
+        "cooldown_tag": "FT::SHOT_3_CS::3FT"
+      }
+    },
+    "FT::SHOT_3_OD::AND1": {
+      "templates": [
+        {
+          "text": "{pid}의 드리블 3점! {fouler}가 파울을 줬는데도 들어갑니다—앤드원!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 68,
+        "ttl_ms": 1900,
+        "cooldown_tag": "FT::SHOT_3_OD::AND1"
+      }
+    },
+    "FT::SHOT_3_OD::3FT": {
+      "templates": [
+        {
+          "text": "{pid}가 오프드리블 3점을 시도했는데 파울! {fouler}의 반칙으로 자유투 3개!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 64,
+        "ttl_ms": 1750,
+        "cooldown_tag": "FT::SHOT_3_OD::3FT"
+      }
+    },
+    "TIMEOUT": {
+      "templates": [
+        {
+          "text": "{team_id}가 타임아웃을 요청합니다!",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 48,
+        "ttl_ms": 1300,
+        "cooldown_tag": "TIMEOUT"
+      }
+    },
+    "SUBSTITUTION": {
+      "templates": [
+        {
+          "text": "교체: “{team_id}가 교체를 가져갑니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어옵니다!”",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 46,
+        "ttl_ms": 1300,
+        "cooldown_tag": "SUBSTITUTION"
+      }
+    },
+    "PERIOD_START": {
+      "templates": [
+        {
+          "text": "## 쿼터 시작 멘트",
+          "weight": 1.0
+        },
+        {
+          "text": "* **1쿼터 시작**: “자, 1쿼터 시작입니다! 첫 공격은 {team_id}가 가져갑니다!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **2쿼터 시작**: “2쿼터 시작! 이번 쿼터 첫 공격은 {opp_team_id}입니다. 코트도 바뀌었습니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어왔어요!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **3쿼터 시작**: “후반 시작, 3쿼터 들어갑니다! 첫 공격은 {team_id}! 그리고 로테이션 변화—{sub_out_pid} 아웃, {sub_in_pid} 인!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **4쿼터 시작**: “마지막 4쿼터 시작입니다! 첫 공격은 {opp_team_id}가 잡습니다. 승부수 교체도 보이네요—{sub_out_pid}가 빠지고 {sub_in_pid}가 투입됩니다!”",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 52,
+        "ttl_ms": 1500,
+        "cooldown_tag": "PERIOD_START"
+      }
+    },
+    "PERIOD_END": {
+      "templates": [
+        {
+          "text": "## 쿼터 종료 멘트",
+          "weight": 1.0
+        },
+        {
+          "text": "* **1쿼터 종료**: “1쿼터 종료! 현재 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}입니다!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **2쿼터 종료(전반 종료)**: “전반 종료! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **3쿼터 종료**: “3쿼터 끝났습니다! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **4쿼터 종료(경기 종료)**: “경기 종료! 최종 스코어 {team_id} {score_home}, {opp_team_id} {score_away}!”",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 52,
+        "ttl_ms": 1500,
+        "cooldown_tag": "PERIOD_END"
+      }
+    },
+    "GAME_START": {
+      "templates": [
+        {
+          "text": "## 쿼터 시작 멘트",
+          "weight": 1.0
+        },
+        {
+          "text": "* **1쿼터 시작**: “자, 1쿼터 시작입니다! 첫 공격은 {team_id}가 가져갑니다!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **2쿼터 시작**: “2쿼터 시작! 이번 쿼터 첫 공격은 {opp_team_id}입니다. 코트도 바뀌었습니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어왔어요!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **3쿼터 시작**: “후반 시작, 3쿼터 들어갑니다! 첫 공격은 {team_id}! 그리고 로테이션 변화—{sub_out_pid} 아웃, {sub_in_pid} 인!”",
+          "weight": 1.0
+        },
+        {
+          "text": "* **4쿼터 시작**: “마지막 4쿼터 시작입니다! 첫 공격은 {opp_team_id}가 잡습니다. 승부수 교체도 보이네요—{sub_out_pid}가 빠지고 {sub_in_pid}가 투입됩니다!”",
+          "weight": 1.0
+        }
+      ],
+      "meta": {
+        "priority": 55,
+        "ttl_ms": 1600,
+        "cooldown_tag": "GAME_START"
+      }
+    }
+  }
+}
