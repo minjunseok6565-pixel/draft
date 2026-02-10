@@ -1,194 +1,396 @@
-
-
----
-
-변수: `{pid}`, `{blocker_pid}`
+아래는 **각 상황(key)별로 기존 변수 `{pid}`, `{blocker_pid}`를 그대로 유지**하면서, **같은 상황 해설 5개씩 추가**한 문장들이야.
 
 ---
 
-## A. 림 근처 (Restricted_Area) — 존 언급 없음
+### "MISS::SHOT_RIM_DUNK::MISS"
 
-### SHOT_RIM_DUNK (2점)
+* "{pid}의 덩크! 강하게 찍으려 했지만 림을 맞고 튀어나옵니다!"
+* "{pid} 높이 떴습니다, 덩크 시도! 아… 림에 걸리고 빠져요!"
+* "{pid}가 한 번에 끝내려다 림이 튕겨냅니다! 미스!"
+* "{pid} 폭발적인 덩크! 림을 강타하고 바깥으로 흘러나옵니다!"
+* "{pid}가 내려꽂으려 했는데 공이 림에 걸렸다가 빠집니다!"
 
-**일반 MISS**
-`{pid}`의 덩크 시도! 림을 때리고 튕겨 나옵니다!
+### "MISS::SHOT_RIM_DUNK::BLOCK_INPLAY"
 
-**인플레이 BLOCK**
-`{pid}` 덩크로 올라갑니다! `{blocker_pid}`가 위에서 쳐내며 블록! 공은 살아있습니다!
+* "{pid} 덩크로 치고 들어갑니다! {blocker_pid}가 정면에서 쳐냅니다! 공은 루즈!"
+* "{pid}가 올라갑니다! {blocker_pid}의 타이밍 좋은 블록! 공은 살아있습니다!"
+* "{pid} 덩크 시도! {blocker_pid}가 위에서 찍어 누르며 블록! 인플레이!"
+* "{pid} 파워 덩크! {blocker_pid}가 손으로 걷어냅니다! 계속 진행됩니다!"
+* "{pid}가 림 위로! {blocker_pid}가 스왓! 공이 튀어나와 인플레이!"
 
-**데드볼 BLOCK(OOB)**
-`{pid}` 덩크 시도! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
+### "MISS::SHOT_RIM_DUNK::BLOCK_OOB"
 
----
-
-### SHOT_RIM_LAYUP (2점)
-
-**일반 MISS**
-`{pid}`의 레이업! 살짝 빗나갑니다!
-
-**인플레이 BLOCK**
-`{pid}` 레이업으로 마무리! `{blocker_pid}`가 손끝으로 쳐내며 블록! 인플레이!
-
-**데드볼 BLOCK(OOB)**
-`{pid}` 레이업 시도! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!
+* "{pid} 덩크 시도! {blocker_pid}가 쳐내며 라인 밖으로 보냅니다! 데드볼!"
+* "{pid}가 내려찍으려다 {blocker_pid}에게 막혔고 공은 아웃! 플레이가 멈춥니다!"
+* "{pid} 덩크로 마무리하려 합니다! {blocker_pid}가 블록, 공이 밖으로 나갑니다!"
+* "{pid}가 강하게 올라갔지만 {blocker_pid}의 블록! 아웃 오브 바운즈!"
+* "{pid} 덩크! {blocker_pid}가 손을 뻗어 쳐냈고 볼은 밖으로! 데드볼입니다!"
 
 ---
 
-### SHOT_RIM_CONTACT (2점)
+### "MISS::SHOT_RIM_LAYUP::MISS"
 
-**일반 MISS**
-`{pid}` 접촉을 버티고 올렸지만 마무리가 안 됩니다!
+* "{pid}의 레이업! 림을 살짝 훑고 나오네요!"
+* "{pid}가 가볍게 올려놨지만 굴러나옵니다! 노 굿!"
+* "{pid} 레이업 시도! 각도가 조금 안 맞았어요!"
+* "{pid}가 마무리합니다만 공이 림을 돌고 빠집니다!"
+* "{pid}의 레이업! 힘 조절이 살짝 과했어요, 미스!"
 
-**인플레이 BLOCK**
-`{pid}` 몸싸움 속 슛! `{blocker_pid}`가 끝까지 따라와 블록! 공은 인플레이!
+### "MISS::SHOT_RIM_LAYUP::BLOCK_INPLAY"
 
-**데드볼 BLOCK(OOB)**
-`{pid}` 컨택 속 마무리! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
+* "{pid} 레이업으로 들어갑니다! {blocker_pid}가 따라와 쳐냅니다! 공은 살아있어요!"
+* "{pid}가 올립니다! {blocker_pid}의 손끝 블록! 인플레이로 이어집니다!"
+* "{pid} 레이업 마무리! {blocker_pid}가 타이밍 맞춰 스왓! 루즈볼!"
+* "{pid}가 림 근처에서 올렸는데 {blocker_pid}가 쳐냈습니다! 공은 인플레이!"
+* "{pid} 레이업 시도! {blocker_pid}가 위에서 건드리며 블록! 계속 진행!"
 
----
+### "MISS::SHOT_RIM_LAYUP::BLOCK_OOB"
 
-## B. 페인트 비-RA (Paint_Non_RA) — 존 언급 없음
-
-### SHOT_TOUCH_FLOATER (2점)
-
-**일반 MISS**
-`{pid}`의 플로터! 터치가 조금 길었습니다!
-
-**인플레이 BLOCK**
-`{pid}` 플로터로 띄웁니다! `{blocker_pid}`가 손끝으로 쳐내요! 공은 살아있어요!
-
-**데드볼 BLOCK(OOB)**
-`{pid}` 플로터 시도! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!
+* "{pid} 레이업 시도! {blocker_pid}가 쳐내고 공이 밖으로 나갑니다! 데드볼!"
+* "{pid}가 올려놨지만 {blocker_pid}가 막아냈고 아웃 오브 바운즈!"
+* "{pid} 레이업! {blocker_pid}가 손끝으로 쳐내며 밖으로! 플레이 스톱!"
+* "{pid}가 마무리하려다 {blocker_pid}에게 막혔고 볼은 라인 밖! 데드볼!"
+* "{pid} 레이업 시도! {blocker_pid} 블록 이후 공이 아웃! 데드볼입니다!"
 
 ---
 
-### SHOT_POST (2점)
+### "MISS::SHOT_RIM_CONTACT::MISS"
 
-**일반 MISS**
-`{pid}` 포스트에서 돌아서 마무리! 림이 허락하지 않네요!
+* "{pid} 컨택을 견뎠지만 끝에서 힘이 모자랍니다! 미스!"
+* "{pid} 몸 맞고도 올렸는데 림을 외면하네요!"
+* "{pid}가 버텼지만 밸런스가 무너졌어요! 마무리 실패!"
+* "{pid} 접촉 속 슛! 공이 림을 맞고 나옵니다!"
+* "{pid} 파울성 접촉에도 시도했지만 떨어집니다!"
 
-**인플레이 BLOCK**
-`{pid}` 포스트 슛으로 마무리! `{blocker_pid}`가 위에서 찍어 눌러 블록! 인플레이!
+### "MISS::SHOT_RIM_CONTACT::BLOCK_INPLAY"
 
-**데드볼 BLOCK(OOB)**
-`{pid}` 포스트 훅 시도! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!
+* "{pid} 컨택 속 마무리! {blocker_pid}가 끝까지 따라와 쳐냅니다! 인플레이!"
+* "{pid} 몸싸움 이겨내고 올렸지만 {blocker_pid}가 블록! 공은 살아있어요!"
+* "{pid}가 비틀리며 올립니다! {blocker_pid}의 추격 블록! 루즈볼!"
+* "{pid} 접촉 속 슛 시도! {blocker_pid}가 위에서 걷어냅니다! 계속 진행!"
+* "{pid}가 강하게 마무리하려다 {blocker_pid}에게 막힙니다! 인플레이!"
 
----
+### "MISS::SHOT_RIM_CONTACT::BLOCK_OOB"
 
-## C. 미드레인지 (Mid_Range)
-
-### SHOT_MID_PU (2점)
-
-**일반 MISS**
-
-* [존 포함] `{pid}` 미드레인지 풀업 점퍼! 림을 맞고 빠집니다!
-* [존 미포함] `{pid}` 풀업 점퍼! 림을 맞고 빠집니다!
-
-**인플레이 BLOCK**
-
-* [존 포함] `{pid}` 미드레인지 풀업! `{blocker_pid}`가 타이밍 맞춰 쳐냈습니다! 공은 살아있습니다!
-* [존 미포함] `{pid}` 풀업으로 올라갑니다! `{blocker_pid}`가 쳐냈습니다! 인플레이!
-
-**데드볼 BLOCK(OOB)**
-
-* [존 포함] `{pid}` 미드레인지 풀업! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼!
-* [존 미포함] `{pid}` 풀업 점퍼 시도! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼입니다!
+* "{pid} 컨택 속 마무리! {blocker_pid}가 쳐냈고 공은 아웃! 데드볼!"
+* "{pid}가 올려놨지만 {blocker_pid} 블록! 볼이 라인 밖으로 나갑니다!"
+* "{pid} 접촉 속 슛! {blocker_pid}가 막아내며 밖으로 쳐냅니다! 데드볼!"
+* "{pid} 몸싸움 후 마무리하려다 {blocker_pid}에게 차단! 아웃 오브 바운즈!"
+* "{pid}가 버텼지만 {blocker_pid}가 쳐냈고 공이 밖으로! 플레이 스톱!"
 
 ---
 
-### SHOT_MID_CS (2점)
+### "MISS::SHOT_TOUCH_FLOATER::MISS"
 
-**일반 MISS**
+* "{pid}의 플로터! 살짝 짧거나 길었어요, 림을 벗어납니다!"
+* "{pid}가 터치로 띄웠지만 감이 안 맞네요! 미스!"
+* "{pid} 플로터 시도! 공이 림을 맞고 흘러나옵니다!"
+* "{pid}가 부드럽게 올립니다만 너무 길었습니다!"
+* "{pid}의 플로터! 아쉽게도 림을 외면합니다!"
 
-* [존 포함] `{pid}` 미드레인지 캐치 앤 슛! 아쉽게 빗나갑니다!
-* [존 미포함] `{pid}` 받아서 바로 던집니다! 아쉽게 빗나갑니다!
+### "MISS::SHOT_TOUCH_FLOATER::BLOCK_INPLAY"
 
-**인플레이 BLOCK**
+* "{pid} 플로터로 띄웁니다! {blocker_pid}가 손끝으로 쳐냅니다! 인플레이!"
+* "{pid}가 터치로 올렸는데 {blocker_pid}가 따라와 블록! 공은 살아있어요!"
+* "{pid} 플로터 시도! {blocker_pid}가 위에서 건드려 막아냅니다! 루즈볼!"
+* "{pid}가 떠올립니다! {blocker_pid}의 블록으로 공이 튀어요! 계속 진행!"
+* "{pid} 플로터! {blocker_pid}가 타이밍 맞춰 쳐내며 인플레이!"
 
-* [존 포함] `{pid}` 미드레인지에서 바로 던집니다! `{blocker_pid}`가 릴리즈를 읽고 블록! 인플레이!
-* [존 미포함] `{pid}` 곧바로 점퍼! `{blocker_pid}`가 읽고 쳐냈습니다! 공은 살아있어요!
+### "MISS::SHOT_TOUCH_FLOATER::BLOCK_OOB"
 
-**데드볼 BLOCK(OOB)**
-
-* [존 포함] `{pid}` 미드레인지 캐치 앤 슛! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼입니다!
-* [존 미포함] `{pid}` 캐치 앤 슛! `{blocker_pid}`가 막아냈고 아웃 오브 바운즈! 데드볼!
-
----
-
-## D. 3점 (Corner_3 / ATB_3)
-
-### SHOT_3_CS (3점) — Corner_3
-
-**일반 MISS**
-
-* [존 포함] `{pid}` 코너 3점 캐치 앤 슛! 림을 외면합니다!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! 아쉽게 빗나갑니다!
-
-**인플레이 BLOCK**
-
-* [존 포함] `{pid}` 코너에서 캐치 앤 슛 3점! `{blocker_pid}`가 클로즈아웃으로 쳐냈습니다! 공은 살아있어요!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 인플레이!
-
-**데드볼 BLOCK(OOB)**
-
-* [존 포함] `{pid}` 코너 3점 캐치 앤 슛! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼입니다!
+* "{pid} 플로터 시도! {blocker_pid}가 쳐내고 공은 밖으로! 데드볼!"
+* "{pid}가 띄웠지만 {blocker_pid}가 막아냈고 아웃 오브 바운즈!"
+* "{pid} 플로터! {blocker_pid}의 블록 이후 공이 라인 밖으로 나갑니다!"
+* "{pid}가 올려놨는데 {blocker_pid}가 쳐냈습니다! 공은 아웃! 데드볼!"
+* "{pid} 플로터 시도! {blocker_pid} 블록, 공이 밖으로 빠집니다! 플레이 스톱!"
 
 ---
 
-### SHOT_3_CS (3점) — ATB_3(윙/탑)
+### "MISS::SHOT_POST::MISS"
 
-**일반 MISS**
+* "{pid} 포스트에서 훅으로 마무리! 림을 맞고 나옵니다!"
+* "{pid}가 등을 지고 돌아섭니다! 하지만 마무리가 빗나가요!"
+* "{pid} 포스트 무브 좋았는데 슛이 림을 외면합니다!"
+* "{pid}가 턴어라운드로 올렸지만 떨어집니다! 미스!"
+* "{pid} 포스트에서 힘으로 밀어붙였지만 끝이 안 풀리네요!"
 
-* [존 포함] `{pid}` 윙/탑 3점 캐치 앤 슛! 아쉽게 빗나갑니다!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! 림을 외면합니다!
+"MISS::SHOT_POST::BLOCK_INPLAY" : [
+  "{pid} 포스트에서 밀고 들어가 마무리! 그런데 {blocker_pid}가 깔끔하게 찍어 눌러 블록! 공은 살아있습니다!",
+  "{pid} 포스트업으로 한 방! {blocker_pid}가 위에서 막아냈습니다! 인플레이!",
+  "{pid} 골밑 포스트 슛 시도! {blocker_pid}가 타이밍 잡고 블록! 그대로 인플레이!",
+  "{pid} 포스트 턴으로 올라갔는데! {blocker_pid}가 강하게 쳐내며 블록! 공은 살아있어요!",
+  "{pid} 포스트 마무리 들어갑니다! {blocker_pid}가 림 근처에서 블록! 인플레이!"
+]
 
-**인플레이 BLOCK**
+"MISS::SHOT_POST::BLOCK_OOB" : [
+  "{pid} 포스트 훅으로 마무리 노립니다! {blocker_pid}가 건드렸고 공이 라인 밖으로! 데드볼!",
+  "{pid} 포스트에서 슛 올렸는데! {blocker_pid}가 쳐내며 아웃! 공은 밖으로 나갑니다!",
+  "{pid} 골밑 포스트 시도! {blocker_pid}가 막아내고 공이 바깥으로! 데드볼입니다!",
+  "{pid} 포스트에서 마무리! {blocker_pid}의 수비에 막히며 공이 아웃 오브 바운즈! 데드볼!",
+  "{pid} 포스트 슛 올립니다! {blocker_pid}가 손 뻗어 차단, 공은 밖으로! 데드볼!"
+]
 
-* [존 포함] `{pid}` 윙/탑에서 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 인플레이!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈습니다! 공은 살아있습니다!
+"MISS::SHOT_MID_PU::MISS::ZM=Z" : [
+  "{pid} 미드레인지에서 풀업! 림을 튕기고 나오네요!",
+  "{pid} 미드레인지 풀업 점퍼! 살짝 짧았습니다, 림 맞고 아웃!",
+  "{pid} 미드레인지에서 바로 풀업! 림을 때렸지만 득점은 아닙니다!",
+  "{pid} 미드레인지 풀업 시도! 공이 림을 감고도 빠져나옵니다!",
+  "{pid} 미드레인지 풀업! 좋은 리듬이었는데 림 맞고 빗나갑니다!"
+]
 
-**데드볼 BLOCK(OOB)**
+"MISS::SHOT_MID_PU::MISS::ZM=NZ" : [
+  "{pid} 풀업 점퍼 던졌습니다! 림을 맞고 나오네요!",
+  "{pid} 드리블 풀업! 림에 걸렸지만 떨어집니다!",
+  "{pid} 풀업으로 해결! 하지만 림 맞고 불발!",
+  "{pid} 풀업 점퍼 시도! 공이 림을 치고 빠집니다!",
+  "{pid} 풀업 점퍼! 끝까지 굴렀지만 득점으로 연결되지 않습니다!"
+]
 
-* [존 포함] `{pid}` 윙/탑 캐치 앤 슛 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
-* [존 미포함] `{pid}` 캐치 앤 슛 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!
+"MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=Z" : [
+  "{pid} 미드레인지 풀업! {blocker_pid}가 완벽한 타이밍으로 블록, 공은 살아있습니다!",
+  "{pid} 미드레인지에서 풀업 올라갑니다! {blocker_pid}가 쳐냈고 인플레이!",
+  "{pid} 미드레인지 풀업 시도! {blocker_pid}가 손 뻗어 차단! 공은 인플레이!",
+  "{pid} 미드레인지 풀업! {blocker_pid}가 릴리즈를 지워버립니다! 인플레이!",
+  "{pid} 미드레인지 풀업 점퍼! {blocker_pid}가 블록으로 끊어냈습니다! 공은 살아있어요!"
+]
 
----
+"MISS::SHOT_MID_PU::BLOCK_INPLAY::ZM=NZ" : [
+  "{pid} 풀업으로 올라가는데! {blocker_pid}가 쳐냈습니다! 공은 살아있습니다!",
+  "{pid} 풀업 점퍼 시도! {blocker_pid}가 블록! 그대로 인플레이!",
+  "{pid} 풀업으로 해결하려 했지만! {blocker_pid}가 타이밍 맞춰 차단! 인플레이!",
+  "{pid} 풀업 점퍼! {blocker_pid}가 손끝으로 건드려 막았습니다! 공은 살아있어요!",
+  "{pid} 풀업 올라갑니다! {blocker_pid}의 블록, 공은 인플레이!"
+]
 
-### SHOT_3_OD (3점) — Corner_3
+"MISS::SHOT_MID_PU::BLOCK_OOB::ZM=Z" : [
+  "{pid} 미드레인지 풀업! {blocker_pid}가 쳐내며 공이 밖으로! 데드볼!",
+  "{pid} 미드레인지에서 풀업 시도! {blocker_pid}가 막아냈고 아웃 오브 바운즈! 데드볼입니다!",
+  "{pid} 미드레인지 풀업! {blocker_pid}가 손 뻗어 차단, 공은 라인 밖으로! 데드볼!",
+  "{pid} 미드레인지에서 올라갔는데! {blocker_pid}의 블록으로 공이 아웃! 데드볼!",
+  "{pid} 미드레인지 풀업 점퍼! {blocker_pid}가 쳐내고 공이 밖으로 나갑니다! 데드볼!"
+]
 
-**일반 MISS**
+"MISS::SHOT_MID_PU::BLOCK_OOB::ZM=NZ" : [
+  "{pid} 풀업 점퍼! {blocker_pid}가 막아냈고 공이 밖으로 나갑니다! 데드볼!",
+  "{pid} 풀업으로 던졌는데! {blocker_pid}가 블록, 공은 아웃 오브 바운즈! 데드볼!",
+  "{pid} 풀업 점퍼 시도! {blocker_pid}가 쳐내며 공이 라인 밖으로! 데드볼입니다!",
+  "{pid} 풀업 올라갔지만! {blocker_pid}가 차단했고 공이 밖으로! 데드볼!",
+  "{pid} 풀업 점퍼! {blocker_pid}가 손끝으로 막아내며 공이 아웃! 데드볼!"
+]
 
-* [존 포함] `{pid}` 코너에서 드리블 3점! 짧았습니다!
-* [존 미포함] `{pid}` 드리블에서 바로 3점! 짧았습니다!
+"MISS::SHOT_MID_CS::MISS::ZM=Z" : [
+  "{pid} 미드레인지 캐치 앤 슛! 림을 외면합니다!",
+  "{pid} 미드레인지에서 받아서 바로! 하지만 빗나갑니다!",
+  "{pid} 미드레인지 캐치 앤 슛 시도! 공이 림을 스치고 빠져요!",
+  "{pid} 미드레인지에서 바로 올라갑니다! 아쉽게도 불발!",
+  "{pid} 미드레인지 캐치 앤 슛! 리듬은 좋았지만 득점은 아닙니다!"
+]
 
-**인플레이 BLOCK**
+"MISS::SHOT_MID_CS::MISS::ZM=NZ" : [
+  "{pid} 받아서 곧바로 점퍼! 아쉽게도 빗나갑니다!",
+  "{pid} 캐치 후 즉시 슛! 림 맞고 나오네요!",
+  "{pid} 받아서 바로 던졌습니다! 득점은 실패!",
+  "{pid} 캐치 앤 슛! 공이 림을 때리고 빠집니다!",
+  "{pid} 노마크 찬스에서 바로! 하지만 슛이 빗나갑니다!"
+]
 
-* [존 포함] `{pid}` 코너 드리블 3점으로 올라갑니다! `{blocker_pid}`가 끝까지 따라와 블록! 공은 살아있습니다!
-* [존 미포함] `{pid}` 드리블 3점 시도! `{blocker_pid}`가 쳐냈습니다! 인플레이!
+"MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=Z" : [
+  "{pid} 미드레인지 캐치 앤 슛! {blocker_pid}가 읽고 블록! 공은 살아있습니다!",
+  "{pid} 미드레인지에서 바로 던졌는데! {blocker_pid}가 쳐냈습니다! 인플레이!",
+  "{pid} 미드레인지 캐치 앤 슛 시도! {blocker_pid}가 손 뻗어 차단! 공은 인플레이!",
+  "{pid} 미드레인지 점퍼! {blocker_pid}가 릴리즈 타이밍에 블록! 공은 살아있어요!",
+  "{pid} 미드레인지에서 올라갑니다! {blocker_pid}가 깔끔하게 블록, 인플레이!"
+]
 
-**데드볼 BLOCK(OOB)**
+"MISS::SHOT_MID_CS::BLOCK_INPLAY::ZM=NZ" : [
+  "{pid} 곧바로 던집니다! {blocker_pid}가 블록! 공은 살아있습니다!",
+  "{pid} 캐치 앤 슛 올라갔는데! {blocker_pid}가 쳐냈고 인플레이!",
+  "{pid} 받아서 바로 슛! {blocker_pid}가 읽고 차단! 공은 인플레이!",
+  "{pid} 즉시 점퍼! {blocker_pid}가 손끝으로 막아냅니다! 공은 살아있어요!",
+  "{pid} 바로 올라갑니다! {blocker_pid}의 블록! 인플레이!"
+]
 
-* [존 포함] `{pid}` 코너 드리블 3점! `{blocker_pid}`가 막아냈고 공이 밖으로! 데드볼!
-* [존 미포함] `{pid}` 드리블 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
+"MISS::SHOT_MID_CS::BLOCK_OOB::ZM=Z" : [
+  "{pid} 미드레인지 캐치 앤 슛! {blocker_pid}가 쳐냈고 공이 밖으로! 데드볼!",
+  "{pid} 미드레인지에서 바로 던졌는데! {blocker_pid}가 막아내며 아웃! 데드볼입니다!",
+  "{pid} 미드레인지 캐치 앤 슛 시도! {blocker_pid}의 블록, 공은 라인 밖으로! 데드볼!",
+  "{pid} 미드레인지 점퍼! {blocker_pid}가 차단했고 공이 아웃 오브 바운즈! 데드볼!",
+  "{pid} 미드레인지에서 쏩니다! {blocker_pid}가 쳐내며 공이 밖으로 나갑니다! 데드볼!"
+]
+"MISS::SHOT_MID_CS::BLOCK_OOB::ZM=NZ" : [
+"{pid} 미드레인지 캐치 앤 슛! {blocker_pid}가 손끝으로 쳐냈고 공이 라인 밖으로 나갑니다! 데드볼!",
+"{pid} 캐치 앤 슛, 중거리! {blocker_pid}의 블록! 그대로 아웃 오브 바운즈—데드볼입니다!",
+"{pid} 중거리에서 바로 던졌는데요! {blocker_pid}가 막아냈습니다! 공은 밖으로, 데드볼!",
+"{pid} 캐치 앤 슛 미드레인지! {blocker_pid}가 타이밍 좋게 쳐냈고 공이 밖으로! 데드볼!",
+"{pid} 바로 올라갑니다! 하지만 {blocker_pid}가 블록! 공이 터치 라인 밖으로 나가며 데드볼!"
+]
 
----
+"MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=Z" : [
+"{pid} 코너에서 3점 캐치 앤 슛! 길게 떴습니다, 림 아웃!",
+"{pid} 코너 3점 바로 쏩니다! 아, 약간 빗나가네요!",
+"{pid} 코너 3점 캐치 앤 슛! 림을 때리고 튀어나옵니다!",
+"{pid} 코너에서 노마크 캐치 앤 슛 3점! 끝이 안 맞았습니다!",
+"{pid} 코너 3점 시도! 좋았는데요—아쉽게도 실패!"
+]
 
-### SHOT_3_OD (3점) — ATB_3(윙/탑)
+"MISS::SHOT_3_CS::MISS::ZONE=Corner_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! 슛이 짧습니다!",
+"{pid} 캐치 앤 슛 3점 시도! 림을 살짝 비껴갑니다!",
+"{pid} 바로 던진 3점! 아쉽게도 림이 안 열리네요!",
+"{pid} 캐치 앤 슛 3점! 끝이 살짝 흔들렸습니다!",
+"{pid} 3점 캐치 앤 슛! 들어갈 듯했지만 놓칩니다!"
+]
 
-**일반 MISS**
+"MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : [
+"{pid} 코너에서 캐치 앤 슛 3점! {blocker_pid}가 타이밍 맞춰 쳐냈습니다! 공은 살아있습니다!",
+"{pid} 코너 3점 올라갑니다! {blocker_pid}의 블록! 인플레이로 이어집니다!",
+"{pid} 코너 캐치 앤 슛 3점! {blocker_pid}가 손을 뻗어 막아냈고 공은 인플레이!",
+"{pid} 코너에서 던졌는데요—{blocker_pid}가 쳐냈습니다! 루즈볼, 공은 살아있어요!",
+"{pid} 코너 3점 캐치 앤 슛! {blocker_pid}가 클로즈아웃 블록! 인플레이!"
+]
 
-* [존 포함] `{pid}` 윙/탑에서 드리블 3점! 림을 맞고 나옵니다!
-* [존 미포함] `{pid}` 드리블에서 바로 3점! 림을 외면합니다!
+"MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 막아냈습니다! 공은 인플레이!",
+"{pid} 3점 바로 올라가지만 {blocker_pid}의 블록! 공이 튀어나오며 살아있습니다!",
+"{pid} 캐치 앤 슛 3점 시도! {blocker_pid}가 손끝으로 쳐냈고 인플레이!",
+"{pid} 던졌습니다, 3점! {blocker_pid}가 건드렸어요! 공은 계속 진행!",
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 훑어냈습니다! 인플레이입니다!"
+]
 
-**인플레이 BLOCK**
+"MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : [
+"{pid} 코너 3점 캐치 앤 슛! {blocker_pid}가 쳐냈고 공은 밖으로! 데드볼!",
+"{pid} 코너에서 3점! {blocker_pid}의 블록! 공이 라인 밖으로 나가며 데드볼입니다!",
+"{pid} 코너 3점 시도! {blocker_pid}가 막아냈고 터치 라인 밖, 데드볼!",
+"{pid} 코너 캐치 앤 슛 3점! {blocker_pid}가 손으로 쳐내며 아웃 오브 바운즈! 데드볼!",
+"{pid} 코너 3점 올라가는데요—{blocker_pid}가 블록! 공은 밖으로 나가 데드볼!"
+]
 
-* [존 포함] `{pid}` 윙/탑 드리블 3점! `{blocker_pid}`가 쳐냈습니다! 공은 인플레이!
-* [존 미포함] `{pid}` 드리블 3점으로 올라갑니다! `{blocker_pid}`가 쳐냈습니다! 인플레이!
+"MISS::SHOT_3_CS::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 막아냈고 공이 밖으로 나갑니다! 데드볼!",
+"{pid} 3점 시도! {blocker_pid}의 블록에 공이 라인 밖! 데드볼입니다!",
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 쳐냈고 그대로 아웃 오브 바운즈—데드볼!",
+"{pid} 3점이 막혔습니다! {blocker_pid}가 건드려서 공이 밖으로! 데드볼!",
+"{pid} 캐치 앤 슛 3점인데요—{blocker_pid}가 블록! 공은 밖으로 나가며 데드볼!"
+]
 
-**데드볼 BLOCK(OOB)**
+"MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=Z" : [
+"{pid} 윙/탑 3점 캐치 앤 슛! 슛이 빗나갑니다!",
+"{pid} 윙/탑에서 3점 바로 쏩니다! 림 아웃!",
+"{pid} 윙/탑 3점 캐치 앤 슛! 각도가 조금 벗어났어요!",
+"{pid} 윙/탑 3점 시도! 림을 맞고 튀어나옵니다!",
+"{pid} 윙/탑에서 캐치 앤 슛 3점! 아, 끝이 안 맞습니다!"
+]
 
-* [존 포함] `{pid}` 윙/탑 드리블 3점! `{blocker_pid}`가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
-* [존 미포함] `{pid}` 드리블 3점! `{blocker_pid}`가 쳐냈고 공이 밖으로! 데드볼!
+"MISS::SHOT_3_CS::MISS::ZONE=ATB_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! 슛이 길었습니다!",
+"{pid} 캐치 앤 슛 3점 시도! 아쉽게도 실패!",
+"{pid} 3점 바로 던졌는데요! 림을 외면합니다!",
+"{pid} 캐치 앤 슛 3점! 살짝 옆으로 빗나가네요!",
+"{pid} 3점 캐치 앤 슛! 들어갈 듯했지만 놓칩니다!"
+]
 
----
+"MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : [
+"{pid} 윙/탑에서 캐치 앤 슛 3점! {blocker_pid}가 막아냈고 공은 인플레이!",
+"{pid} 윙/탑 3점 올라갑니다! {blocker_pid}의 블록! 공이 살아있어요!",
+"{pid} 윙/탑 캐치 앤 슛 3점! {blocker_pid}가 손끝으로 쳐냈습니다! 인플레이!",
+"{pid} 윙/탑에서 3점 시도! {blocker_pid}가 클린 블록! 루즈볼, 인플레이!",
+"{pid} 윙/탑 3점 캐치 앤 슛! {blocker_pid}가 타이밍 맞춰 쳐냈습니다! 공은 살아있습니다!"
+]
+
+"MISS::SHOT_3_CS::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 막아냈습니다! 인플레이!",
+"{pid} 3점 시도! {blocker_pid}의 블록으로 공이 튀어나오며 살아있습니다!",
+"{pid} 캐치 앤 슛 3점인데요—{blocker_pid}가 쳐냈어요! 공은 진행!",
+"{pid} 3점 올라갑니다! {blocker_pid}가 손을 대며 블록! 인플레이!",
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 건드려 막아냈고 공은 살아있습니다!"
+]
+
+"MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : [
+"{pid} 윙/탑 3점 캐치 앤 슛! {blocker_pid}가 쳐냈고 공은 밖으로! 데드볼!",
+"{pid} 윙/탑에서 3점! {blocker_pid}의 블록! 공이 라인 밖으로 나가며 데드볼입니다!",
+"{pid} 윙/탑 캐치 앤 슛 3점 시도! {blocker_pid}가 막아냈고 아웃 오브 바운즈! 데드볼!",
+"{pid} 윙/탑 3점 올라갔는데요—{blocker_pid}가 쳐냈습니다! 공은 밖으로, 데드볼!",
+"{pid} 윙/탑 3점 캐치 앤 슛! {blocker_pid}가 블록으로 밖으로 쳐내며 데드볼!"
+]
+
+"MISS::SHOT_3_CS::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : [
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 막아냈고 공이 밖으로! 데드볼!",
+"{pid} 3점 시도! {blocker_pid}의 블록! 공은 라인 밖으로 나가 데드볼입니다!",
+"{pid} 캐치 앤 슛 3점이 막혔습니다! {blocker_pid}가 쳐냈고 아웃 오브 바운즈! 데드볼!",
+"{pid} 3점 올라가지만 {blocker_pid}가 블록! 공이 밖으로 나가며 데드볼!",
+"{pid} 캐치 앤 슛 3점! {blocker_pid}가 손끝으로 쳐내고 공은 밖으로! 데드볼입니다!"
+]
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블 3점! 앞 림에 걸렸습니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점 시도! 힘이 모자랐어요!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블로 3점! 쇼트입니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점! 짧게 떨어집니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블 3점 올라갔는데요! 앞쪽 림!"
+
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점 바로 쐈는데요! 앞 림!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점! 힘이 덜 실렸습니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블에서 풀업 3점! 쇼트!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점 시도! 짧게 떨어져요!"
+"MISS::SHOT_3_OD::MISS::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점! 앞쪽에서 멈춥니다!"
+
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블 3점! {blocker_pid} 손끝이 닿았습니다! 공은 살아있어요!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점으로 올라가는데 {blocker_pid}가 타이밍 블록! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 풀업 3점! {blocker_pid}가 따라붙어 쳐냈습니다! 공은 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점 시도! {blocker_pid}가 위에서 찍어눌렀습니다! 살아있습니다!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블 3점! {blocker_pid}가 끝까지 컨테스트, 블록! 공은 계속됩니다!"
+
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 손끝으로 막았습니다! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블에서 올라가자마자 3점! {blocker_pid} 블록! 공은 살아있어요!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점 시도! {blocker_pid}가 쳐냈고 계속 진행!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 풀업 3점! {blocker_pid}가 위에서 건드렸습니다! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=Corner_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}의 블록으로 막혔습니다! 공은 살아있습니다!"
+
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점! {blocker_pid}가 쳐냈고 라인 밖! 데드볼!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 드리블 3점! {blocker_pid} 블록! 공이 밖으로 나갑니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점 시도! {blocker_pid}가 막아내며 아웃! 데드볼입니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : "{pid} 코너에서 풀업 3점! {blocker_pid}가 쳐내고 공은 바깥으로! 플레이 중단!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=Z" : "{pid} 코너 드리블 3점! {blocker_pid} 손끝 블록, 아웃 오브 바운즈! 데드볼!"
+
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : "{pid} 코너 드리블 3점! {blocker_pid}가 쳐냈고 그대로 아웃! 데드볼!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : "{pid} 코너에서 드리블 3점! {blocker_pid} 블록! 공이 라인 밖으로!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : "{pid} 코너 드리블 3점 시도! {blocker_pid}가 막아냈고 아웃 오브 바운즈!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : "{pid} 코너 드리블 3점! {blocker_pid}가 건드려서 밖으로! 데드볼입니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=Corner_3::ZM=NZ" : "{pid} 코너에서 3점 올라가는데요! {blocker_pid}가 쳐냈고 공은 아웃! 데드볼!"
+
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 드리블 3점! 림을 맞고 튕겨 나옵니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점! 림 맞고 바운스 아웃!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 풀업 3점! 림을 때리고 나옵니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점 시도! 림을 맞고 돌아 나와요!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 드리블 3점! 림을 맞고 밖으로!"
+
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! 림에 닿지 못했습니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블에서 바로 3점! 한참 빗나가요!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 풀업 3점! 림을 스치지 않습니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점 시도! 방향이 크게 벗어났습니다!"
+"MISS::SHOT_3_OD::MISS::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! 림을 외면합니다!"
+
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점! {blocker_pid}가 손끝으로 쳐냈습니다! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 풀업 3점! {blocker_pid} 블록! 공은 살아있어요!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점으로 올라가는데요! {blocker_pid}가 타이밍 좋게 막아냈습니다! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 드리블 3점! {blocker_pid}가 위에서 찍어내렸습니다! 공은 계속!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점 시도! {blocker_pid}가 따라와 쳐냈고 공은 인플레이!"
+
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 막아냈습니다! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 풀업 3점! {blocker_pid} 블록! 공은 살아있어요!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블에서 3점 시도! {blocker_pid}가 쳐냈고 계속 진행!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점으로 올라갑니다! {blocker_pid} 손끝 블록! 인플레이!"
+"MISS::SHOT_3_OD::BLOCK_INPLAY::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 건드려 막았습니다! 공은 살아있습니다!"
+
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점! {blocker_pid}가 쳐냈고 공은 밖으로! 데드볼!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 드리블 3점! {blocker_pid} 블록! 아웃 오브 바운즈로 나갑니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점 시도! {blocker_pid}가 막아내며 라인 밖! 데드볼입니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑에서 풀업 3점! {blocker_pid}가 쳐냈고 그대로 아웃! 플레이 중단!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=Z" : "{pid} 윙/탑 드리블 3점! {blocker_pid} 손끝에 맞고 밖으로! 데드볼!"
+
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 쳐냈고 아웃! 데드볼입니다!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 풀업 3점! {blocker_pid} 블록! 공이 라인 밖으로!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점 시도! {blocker_pid}가 막아내며 아웃 오브 바운즈!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 건드려서 밖으로 나갑니다! 데드볼!"
+"MISS::SHOT_3_OD::BLOCK_OOB::ZONE=ATB_3::ZM=NZ" : "{pid} 드리블 3점! {blocker_pid}가 쳐냈고 공은 밖으로! 플레이가 끊깁니다!"
+
+
+
