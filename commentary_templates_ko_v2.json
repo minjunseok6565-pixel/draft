@@ -1130,7 +1130,7 @@
       "meta": {
         "priority": 66,
         "ttl_ms": 1700,
-        "cooldown_tag": "OFF_FOUL::CHARGE"
+        "cooldown_tag": "TO::TO_CHARGE"
       }
     },
     "FOUL_NO_SHOTS::FOUL_REACH_TRAP": {
@@ -1409,9 +1409,9 @@
     "PERIOD_START": {
       "templates": [
         {
-          "text": "text": "{quarter}쿼터 시작! 현재 스코어는 {home_team_id} {score_home}, {away_team_id} {score_away}.",
+          "text": "{quarter}쿼터 시작! 현재 스코어는 {home_team_id} {score_home}, {away_team_id} {score_away}.",
           "weight": 1.0
-        },
+        }
       ],
       "meta": {
         "priority": 52,
@@ -1424,7 +1424,7 @@
         {
           "text": "{quarter}쿼터 종료! 현재 스코어는 {home_team_id} {score_home}, {away_team_id} {score_away}.",
           "weight": 1.0
-        },
+        }
       ],
       "meta": {
         "priority": 52,
@@ -1437,7 +1437,7 @@
         {
           "text": "자, 팁오프와 함께 경기 시작! {home_team_id}와 {away_team_id}의 맞대결입니다.",
           "weight": 1.0
-        },
+        }
       ],
       "meta": {
         "priority": 55,
