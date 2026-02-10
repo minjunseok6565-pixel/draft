@@ -1,13 +1,23 @@
-## 쿼터 시작 멘트
+  "PERIOD_START": [
+    "{quarter}쿼터 출발합니다! 스코어 {home_team_id} {score_home}, {away_team_id} {score_away}.",
+    "다시 시작! {quarter}쿼터, 현재 {home_team_id} {score_home} - {away_team_id} {score_away}입니다.",
+    "{quarter}쿼터가 열립니다! {home_team_id} {score_home}, {away_team_id} {score_away}에서 재개!",
+    "자 {quarter}쿼터 스타트! 스코어보드: {home_team_id} {score_home}, {away_team_id} {score_away}.",
+    "{quarter}쿼터 시작! {home_team_id} {score_home} 대 {away_team_id} {score_away}, 이어갑니다."
+  ],
 
-* **1쿼터 시작**: “자, 1쿼터 시작입니다! 첫 공격은 {team_id}가 가져갑니다!”
-* **2쿼터 시작**: “2쿼터 시작! 이번 쿼터 첫 공격은 {opp_team_id}입니다. 코트도 바뀌었습니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어왔어요!”
-* **3쿼터 시작**: “후반 시작, 3쿼터 들어갑니다! 첫 공격은 {team_id}! 그리고 로테이션 변화—{sub_out_pid} 아웃, {sub_in_pid} 인!”
-* **4쿼터 시작**: “마지막 4쿼터 시작입니다! 첫 공격은 {opp_team_id}가 잡습니다. 승부수 교체도 보이네요—{sub_out_pid}가 빠지고 {sub_in_pid}가 투입됩니다!”
+  "PERIOD_END": [
+    "{quarter}쿼터 마무리! 스코어는 {home_team_id} {score_home}, {away_team_id} {score_away}.",
+    "{quarter}쿼터 끝! 현재 {home_team_id} {score_home} - {away_team_id} {score_away}입니다!",
+    "버저와 함께 {quarter}쿼터 종료! {home_team_id} {score_home}, {away_team_id} {score_away}.",
+    "{quarter}쿼터가 끝났습니다! 스코어 {home_team_id} {score_home}, {away_team_id} {score_away}.",
+    "{quarter}쿼터 종료 신호! {home_team_id} {score_home} 대 {away_team_id} {score_away}로 정리됩니다."
+  ],
 
-## 쿼터 종료 멘트
-
-* **1쿼터 종료**: “1쿼터 종료! 현재 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}입니다!”
-* **2쿼터 종료(전반 종료)**: “전반 종료! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”
-* **3쿼터 종료**: “3쿼터 끝났습니다! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”
-* **4쿼터 종료(경기 종료)**: “경기 종료! 최종 스코어 {team_id} {score_home}, {opp_team_id} {score_away}!”
+  "GAME_START": [
+    "경기 시작합니다! {home_team_id} vs {away_team_id}, 오늘의 승자는 누가 될까요!",
+    "팁오프! {home_team_id}와 {away_team_id}의 한판 승부가 막 올랐습니다!",
+    "자, 시작됐습니다! {home_team_id} 홈에서 {away_team_id}를 맞이합니다!",
+    "경기 출발! {home_team_id}와 {away_team_id}의 맞대결, 첫 포제션은 어디로!",
+    "팁오프와 함께 스타트! {home_team_id} vs {away_team_id}, 본격적으로 갑니다!"
+  ]
