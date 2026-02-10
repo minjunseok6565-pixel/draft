@@ -1,0 +1,13 @@
+## 쿼터 시작 멘트
+
+* **1쿼터 시작**: “자, 1쿼터 시작입니다! 첫 공격은 {team_id}가 가져갑니다!”
+* **2쿼터 시작**: “2쿼터 시작! 이번 쿼터 첫 공격은 {opp_team_id}입니다. 코트도 바뀌었습니다—{sub_out_pid}가 나가고 {sub_in_pid}가 들어왔어요!”
+* **3쿼터 시작**: “후반 시작, 3쿼터 들어갑니다! 첫 공격은 {team_id}! 그리고 로테이션 변화—{sub_out_pid} 아웃, {sub_in_pid} 인!”
+* **4쿼터 시작**: “마지막 4쿼터 시작입니다! 첫 공격은 {opp_team_id}가 잡습니다. 승부수 교체도 보이네요—{sub_out_pid}가 빠지고 {sub_in_pid}가 투입됩니다!”
+
+## 쿼터 종료 멘트
+
+* **1쿼터 종료**: “1쿼터 종료! 현재 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}입니다!”
+* **2쿼터 종료(전반 종료)**: “전반 종료! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”
+* **3쿼터 종료**: “3쿼터 끝났습니다! 스코어는 {team_id} {score_home}, {opp_team_id} {score_away}!”
+* **4쿼터 종료(경기 종료)**: “경기 종료! 최종 스코어 {team_id} {score_home}, {opp_team_id} {score_away}!”
