@@ -1,13 +1,63 @@
-샷클락 턴오버: “샷클락이 울립니다! {pid}가 시간을 다 써버리면서 공격권이 넘어가요!”
+TO::TO_SHOT_CLOCK (5)
 
-루즈볼 턴오버(스틸당함): “{pid}가 볼을 흘렸고, {stealer_pid}가 낚아채며 바로 턴오버!”
+"TO::TO_SHOT_CLOCK" : "시간이 끝났습니다! {handler}가 샷클락에 걸리면서 턴오버!"
+"TO::TO_SHOT_CLOCK" : "샷클락 제로! {handler}가 마무리를 못 하고 공격권이 넘어가요!"
+"TO::TO_SHOT_CLOCK" : "늦었어요! {handler}가 타이밍을 놓치며 샷클락 바이올레이션!"
+"TO::TO_SHOT_CLOCK" : "24초가 다 됐습니다—{handler}의 공격이 무산됩니다!"
+"TO::TO_SHOT_CLOCK" : "버저가 먼저 울렸네요! {handler}가 시간을 못 맞추며 턴오버!"
 
-루즈볼 라인아웃 턴오버(공을 흘려서 라인 밖으로 나감): “{pid}가 공을 흘렸는데 그대로 라인 밖! 루즈볼 라인아웃 턴오버입니다!”
+TO::TO_HANDLE_LOSS::STEAL (5)
 
-루즈볼 턴오버 (스틸이 아니고 혼자 공을 흘려서 공격권을 내줌): “{pid}가 혼자 공을 놓치면서 상대에게 그대로 넘어갑니다!”
+"TO::TO_HANDLE_LOSS::STEAL" : "{handler}가 드리블을 놓쳤고, {stealer}가 재빠르게 스틸!"
+"TO::TO_HANDLE_LOSS::STEAL" : "공이 뜹니다! {handler}의 실수, {stealer}가 바로 낚아챘어요!"
+"TO::TO_HANDLE_LOSS::STEAL" : "{handler}가 볼 컨트롤 미스—{stealer}가 가로채며 공격 전환!"
+"TO::TO_HANDLE_LOSS::STEAL" : "헉! {handler}가 흘린 공을 {stealer}가 훔쳐갑니다!"
+"TO::TO_HANDLE_LOSS::STEAL" : "{stealer}의 압박이 통했어요! {handler}가 놓치고 스틸 허용!"
 
-패스미스 턴오버 (스틸당함): “{pid}의 패스가 읽혔어요! {stealer_pid}가 가로채며 패스미스 턴오버!”
+TO::TO_HANDLE_LOSS::LINEOUT_LOOSE (5)
 
-패스미스 턴오버 (공이 바깥으로 나감): “{pid}의 패스가 너무 길었습니다—라인 밖으로 나가며 턴오버!”
+"TO::TO_HANDLE_LOSS::LINEOUT_LOOSE" : "{handler}가 볼을 떨어뜨렸고, 그대로 사이드라인 밖으로 나갑니다!"
+"TO::TO_HANDLE_LOSS::LINEOUT_LOOSE" : "루즈볼 처리 실패! {handler}가 흘린 공이 라인 밖—턴오버!"
+"TO::TO_HANDLE_LOSS::LINEOUT_LOOSE" : "{handler}가 잡으려다 놓치며 공이 아웃! 공격권이 바뀝니다!"
+"TO::TO_HANDLE_LOSS::LINEOUT_LOOSE" : "아이고! {handler}의 실책으로 공이 라인 밖으로 굴러가요!"
+"TO::TO_HANDLE_LOSS::LINEOUT_LOOSE" : "{handler}가 볼을 컨트롤 못 하면서 라인아웃, 턴오버입니다!"
 
-패스미스 턴오버 (스틸은 아니지만 패스미스로 공격권이 바뀜): “{pid}의 패스가 어긋났고, 상대가 주워 담으면서 공격권이 바뀝니다!”
+TO::TO_HANDLE_LOSS::LIVE (5)
+
+"TO::TO_HANDLE_LOSS::LIVE" : "{handler}가 공을 놓칩니다! 상대가 바로 주워가며 라이브 턴오버!"
+"TO::TO_HANDLE_LOSS::LIVE" : "볼이 손에서 빠졌어요—{handler}의 실수로 공격권이 넘어갑니다!"
+"TO::TO_HANDLE_LOSS::LIVE" : "{handler}가 드리블하다 흘리고, 상대가 그대로 가져가요!"
+"TO::TO_HANDLE_LOSS::LIVE" : "안정적이지 못했네요! {handler}가 놓친 공을 상대가 회수합니다!"
+"TO::TO_HANDLE_LOSS::LIVE" : "{handler}의 핸들 미스! 공이 살아있고, 상대가 바로 전개합니다!"
+
+TO::TO_BAD_PASS::STEAL (5)
+
+"TO::TO_BAD_PASS::STEAL" : "{passer}의 패스가 너무 뻔했어요! {stealer}가 스틸로 끊어냅니다!"
+"TO::TO_BAD_PASS::STEAL" : "패스 길이 막혔습니다—{stealer}가 읽고 가로채요! ({passer} 패스 미스)"
+"TO::TO_BAD_PASS::STEAL" : "{passer}가 던졌는데, {stealer}가 한 박자 먼저 낚아챘습니다!"
+"TO::TO_BAD_PASS::STEAL" : "위험한 패스였어요! {stealer}가 끊어내며 턴오버 유도!"
+"TO::TO_BAD_PASS::STEAL" : "{passer}의 패스가 걸렸습니다! {stealer}가 가로채며 분위기 반전!"
+
+TO::TO_BAD_PASS::LINEOUT_BAD_PASS (5)
+
+"TO::TO_BAD_PASS::LINEOUT_BAD_PASS" : "{passer}의 패스가 터치라인 밖으로! 그대로 턴오버입니다!"
+"TO::TO_BAD_PASS::LINEOUT_BAD_PASS" : "오버패스! {passer}의 패스가 길어서 라인아웃!"
+"TO::TO_BAD_PASS::LINEOUT_BAD_PASS" : "{passer}가 너무 강하게 뿌렸어요—공이 그대로 밖으로 나갑니다!"
+"TO::TO_BAD_PASS::LINEOUT_BAD_PASS" : "받는 선수가 없었습니다! {passer}의 패스가 라인 밖으로!"
+"TO::TO_BAD_PASS::LINEOUT_BAD_PASS" : "{passer}의 패스가 코트를 벗어납니다—공격권은 상대에게!"
+
+TO::TO_BAD_PASS::LIVE (5)
+
+"TO::TO_BAD_PASS::LIVE" : "{passer}의 패스가 빗나갑니다! 상대가 잡아채며 라이브 볼 턴오버!"
+"TO::TO_BAD_PASS::LIVE" : "연결이 안 됐어요—{passer}의 패스 미스, 상대가 회수합니다!"
+"TO::TO_BAD_PASS::LIVE" : "{passer}가 던진 공이 떠버렸고, 상대가 주워 담아요!"
+"TO::TO_BAD_PASS::LIVE" : "패스가 어긋나며 공이 살아있습니다! 상대가 바로 가져갑니다!"
+"TO::TO_BAD_PASS::LIVE" : "{passer}의 실책성 패스! 상대에게 바로 넘어가면서 공격 전환!"
+
+TO::TO_CHARGE (5)
+
+"TO::TO_CHARGE" : "차징 콜! {fouler}가 수비 벽을 못 넘고 공격자 파울입니다!"
+"TO::TO_CHARGE" : "무리한 돌파였어요—{fouler}에게 공격자 파울 선언!"
+"TO::TO_CHARGE" : "오펜스 차지! {fouler}가 밀고 들어가다 파울로 끊깁니다!"
+"TO::TO_CHARGE" : "수비가 버텼습니다! {fouler}의 돌파가 차징으로 마무리!"
+"TO::TO_CHARGE" : "공격자 파울! {fouler}가 몸으로 들이받으며 턴오버!"
