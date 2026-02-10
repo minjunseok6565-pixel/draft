@@ -1,69 +1,181 @@
+"SCORE::SHOT_RIM_DUNK::V1" : "{pid}가 그대로 꽂아 넣습니다! {points}점!"
+"SCORE::SHOT_RIM_DUNK::V2" : "{pid}의 호쾌한 덩크! {points}점 추가!"
+"SCORE::SHOT_RIM_DUNK::V3" : "{pid}가 림 위를 장악합니다! {points}점!"
+"SCORE::SHOT_RIM_DUNK::V4" : "{pid}가 공중에서 마무리! {points}점!"
+"SCORE::SHOT_RIM_DUNK::V5" : "{pid}의 강력한 한 방, 덩크 성공! {points}점!"
 
-## SHOT_RIM_DUNK (2개)
+"SCORE::SHOT_RIM_DUNK::ASSIST::V1" : "{assister_pid}가 띄워주고, {pid}가 덩크로 마무리! {points}점!"
+"SCORE::SHOT_RIM_DUNK::ASSIST::V2" : "{assister_pid}의 기가 막힌 패스! {pid}가 찍어 눌렀습니다! {points}점!"
+"SCORE::SHOT_RIM_DUNK::ASSIST::V3" : "{assister_pid}의 어시스트에 {pid}가 원핸드 덩크! {points}점!"
+"SCORE::SHOT_RIM_DUNK::ASSIST::V4" : "{assister_pid}가 길을 열어주고 {pid}가 림을 폭격! {points}점!"
+"SCORE::SHOT_RIM_DUNK::ASSIST::V5" : "{assister_pid}의 배달 완료! {pid}가 호쾌하게 꽂습니다! {points}점!"
 
-* 기본: `{pid}가 림을 찍어 눌렀습니다! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}가 림을 찍어 눌렀습니다! {points}점!`
+"SCORE::SHOT_RIM_LAYUP::V1" : "{pid}가 깔끔하게 올려놓습니다! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::V2" : "{pid}의 부드러운 마무리, 레이업 성공! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::V3" : "{pid}가 침착하게 넣었습니다! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::V4" : "{pid}가 골밑에서 살짝 얹어 넣네요! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::V5" : "{pid}의 빠른 돌파 후 레이업! {points}점!"
 
-## SHOT_RIM_LAYUP (2개)
+"SCORE::SHOT_RIM_LAYUP::ASSIST::V1" : "{assister_pid}의 어시스트, {pid}가 레이업으로 마무리! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::ASSIST::V2" : "{assister_pid}가 찔러주고 {pid}가 가볍게 올립니다! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::ASSIST::V3" : "{assister_pid}의 패스가 좋았어요, {pid} 레이업 성공! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::ASSIST::V4" : "{assister_pid}가 연결! {pid}가 골밑에서 득점! {points}점!"
+"SCORE::SHOT_RIM_LAYUP::ASSIST::V5" : "{assister_pid}가 만들어준 찬스, {pid}가 놓치지 않습니다! {points}점!"
 
-* 기본: `{pid}의 레이업이 들어갑니다! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}의 레이업이 들어갑니다! {points}점!`
+"SCORE::SHOT_RIM_CONTACT::V1" : "{pid}가 몸싸움 버티고 넣습니다! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::V2" : "{pid}가 파울에도 굴하지 않고 성공! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::V3" : "{pid}가 수비를 달고도 마무리! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::V4" : "{pid}가 강하게 밀고 들어가 득점! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::V5" : "{pid}의 터프한 골밑 득점! {points}점!"
 
-## SHOT_RIM_CONTACT (2개)
+"SCORE::SHOT_RIM_CONTACT::ASSIST::V1" : "{assister_pid}의 어시스트, {pid}가 컨택 속에서도 넣었습니다! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::ASSIST::V2" : "{assister_pid}가 찔러준 공, {pid}가 몸으로 버티며 득점! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::ASSIST::V3" : "{assister_pid}의 패스 이후 {pid}가 터프샷 성공! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::ASSIST::V4" : "{assister_pid}가 연결했고, {pid}가 수비를 이겨냅니다! {points}점!"
+"SCORE::SHOT_RIM_CONTACT::ASSIST::V5" : "{assister_pid}의 도움으로 {pid}가 골밑에서 강하게 해결! {points}점!"
 
-* 기본: `{pid}가 컨택을 이겨내고 넣었습니다! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}가 컨택을 이겨내고 넣었습니다! {points}점!`
+"SCORE::SHOT_TOUCH_FLOATER::V1" : "{pid}의 플로터, 부드럽게 들어갑니다! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::V2" : "{pid}가 감각적인 플로터로 득점! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::V3" : "{pid}의 손끝 감각! 플로터 성공! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::V4" : "{pid}가 수비 위로 띄워 넣습니다! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::V5" : "{pid}의 높게 띄운 플로터가 림을 가릅니다! {points}점!"
 
-## SHOT_TOUCH_FLOATER (2개)
+"SCORE::SHOT_TOUCH_FLOATER::ASSIST::V1" : "{assister_pid}의 어시스트, {pid} 플로터로 마무리! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::ASSIST::V2" : "{assister_pid}가 만들어준 공간! {pid}의 플로터 성공! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::ASSIST::V3" : "{assister_pid}의 패스가 정확했고, {pid}가 플로터로 넣습니다! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::ASSIST::V4" : "{assister_pid}가 찔러주자 {pid}가 감각적으로 띄워 넣네요! {points}점!"
+"SCORE::SHOT_TOUCH_FLOATER::ASSIST::V5" : "{assister_pid}의 도움, {pid}의 부드러운 플로터! {points}점!"
 
-* 기본: `{pid}의 플로터가 톡 떨어집니다! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}의 플로터가 톡 떨어집니다! {points}점!`
+"SCORE::SHOT_POST::V1" : "{pid}가 포스트업으로 깔끔히 득점! {points}점!"
+"SCORE::SHOT_POST::V2" : "{pid}의 등지고 들어가는 플레이, 성공! {points}점!"
+"SCORE::SHOT_POST::V3" : "{pid}가 포스트에서 한 번 더 눌러줍니다! {points}점!"
+"SCORE::SHOT_POST::V4" : "{pid}의 페이드/훅으로 포스트 득점! {points}점!"
+"SCORE::SHOT_POST::V5" : "{pid}가 골밑에서 힘으로 해결합니다! {points}점!"
 
-## SHOT_POST (2개)
+"SCORE::SHOT_POST::ASSIST::V1" : "{assister_pid}의 어시스트, {pid}가 포스트에서 마무리! {points}점!"
+"SCORE::SHOT_POST::ASSIST::V2" : "{assister_pid}가 투입 패스! {pid} 포스트 득점 성공! {points}점!"
+"SCORE::SHOT_POST::ASSIST::V3" : "{assister_pid}가 넣어줬고, {pid}가 등지고 해결! {points}점!"
+"SCORE::SHOT_POST::ASSIST::V4" : "{assister_pid}의 패스가 열쇠였어요, {pid}가 포스트에서 득점! {points}점!"
+"SCORE::SHOT_POST::ASSIST::V5" : "{assister_pid}가 연결하자 {pid}가 골밑에서 정리합니다! {points}점!"
 
-* 기본: `{pid}가 포스트에서 해결합니다! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}가 포스트에서 해결합니다! {points}점!`
+"SCORE::SHOT_MID_PU::V1" : "{pid}의 풀업 미드레인지! {points}점!"
+"SCORE::SHOT_MID_PU::V2" : "{pid}가 드리블 후 풀업, 그대로 득점! {points}점!"
+"SCORE::SHOT_MID_PU::V3" : "{pid}의 리듬 타는 풀업 점퍼! {points}점!"
+"SCORE::SHOT_MID_PU::V4" : "{pid}가 스텝백은 아니지만 풀업으로 꽂습니다! {points}점!"
+"SCORE::SHOT_MID_PU::V5" : "{pid}의 미드레인지 풀업이 림을 통과! {points}점!"
 
----
+"SCORE::SHOT_MID_PU::ASSIST::V1" : "{assister_pid}의 어시스트, {pid} 풀업 점퍼로 득점! {points}점!"
+"SCORE::SHOT_MID_PU::ASSIST::V2" : "{assister_pid}가 연결해주고 {pid}가 미드레인지에서 풀업! {points}점!"
+"SCORE::SHOT_MID_PU::ASSIST::V3" : "{assister_pid}의 패스 이후 {pid}가 한 번 드리블, 풀업 성공! {points}점!"
+"SCORE::SHOT_MID_PU::ASSIST::V4" : "{assister_pid}가 찔러주자 {pid}가 풀업으로 응답합니다! {points}점!"
+"SCORE::SHOT_MID_PU::ASSIST::V5" : "{assister_pid}의 도움을 받아 {pid}가 미들에서 풀업을 꽂네요! {points}점!"
 
-## SHOT_MID_PU (4개)
+"SCORE::SHOT_MID_CS::V1" : "{pid} 캐치앤슛 미드레인지! {points}점!"
+"SCORE::SHOT_MID_CS::V2" : "{pid}가 받아서 바로 쏘고 넣습니다! {points}점!"
+"SCORE::SHOT_MID_CS::V3" : "{pid}의 미드레인지 원모션! {points}점!"
+"SCORE::SHOT_MID_CS::V4" : "{pid}가 스팟에서 정확히 꽂아 넣네요! {points}점!"
+"SCORE::SHOT_MID_CS::V5" : "{pid}의 캐치앤슛, 미드레인지 득점! {points}점!"
+"SCORE::SHOT_MID_CS::ASSIST" : [
+  "{assister_pid}의 패스! {pid} 미드레인지 캐치앤슛 적중! {points}점!",
+  "{assister_pid}가 만들어줬고, {pid}가 미드레인지에서 깔끔히 마무리! {points}점!",
+  "{assister_pid}의 어시스트에 이어 {pid} 미드레인지 캐치앤슛! 그대로 들어갑니다! {points}점!",
+  "{assister_pid}가 찔러주고 {pid}가 미드레인지 캐치앤슛 성공! {points}점!",
+  "{assister_pid}의 도움, {pid}가 미드레인지에서 받아서 바로 쏩니다! {points}점!"
+]
 
-* 기본: `{pid} 미드레인지 풀업 점퍼! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지 풀업 점퍼! {points}점!`
-* 존: `{pid} 미드레인지에서 풀업 점퍼! {points}점!`
-* 존+어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지에서 풀업 점퍼! {points}점!`
+"SCORE::SHOT_3_CS" : [
+  "{pid} 캐치앤슛 3점! 림을 가릅니다! {points}점!",
+  "{pid} 받아서 바로 3점! 스플래시! {points}점!",
+  "{pid} 노마크 캐치앤슛 3점 성공! {points}점!",
+  "{pid} 캐치앤슛 3점이네요! 깔끔합니다! {points}점!",
+  "{pid} 한 박자도 없이 캐치앤슛 3점! {points}점!"
+]
 
-## SHOT_MID_CS (4개)
+"SCORE::SHOT_3_CS::ASSIST" : [
+  "{assister_pid}의 어시스트! {pid} 캐치앤슛 3점 적중! {points}점!",
+  "{assister_pid}가 열어줬고 {pid}가 바로 3점! {points}점!",
+  "{assister_pid}의 패스, {pid} 캐치앤슛 3점! 시원하게 들어갑니다! {points}점!",
+  "{assister_pid}가 뿌려주고 {pid}가 받아서 3점 성공! {points}점!",
+  "{assister_pid}의 도움으로 {pid} 캐치앤슛 3점! {points}점!"
+]
 
-* 기본: `{pid} 미드레인지 캐치앤슛! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지 캐치앤슛! {points}점!`
-* 존: `{pid} 미드레인지에서 캐치앤슛! {points}점!`
-* 존+어시스트: `{assister_pid}의 어시스트, {pid} 미드레인지에서 캐치앤슛! {points}점!`
+"SCORE::SHOT_3_CS::ZONE=Corner_3" : [
+  "{pid} 코너에서 캐치앤슛 3점! 정확합니다! {points}점!",
+  "{pid} 코너 3점 캐치앤슛 적중! {points}점!",
+  "{pid} 코너에서 받아서 바로 3점! {points}점!",
+  "{pid} 코너 스팟업 3점 성공! {points}점!",
+  "{pid} 코너 3점 캐치앤슛! 림을 찢습니다! {points}점!"
+]
 
----
+"SCORE::SHOT_3_CS::ZONE=ATB_3" : [
+  "{pid} 탑에서 캐치앤슛 3점! {points}점!",
+  "{pid} 탑 3점 캐치앤슛 적중! 시원하네요! {points}점!",
+  "{pid} 탑에서 받아서 곧바로 3점 성공! {points}점!",
+  "{pid} 정면 탑 캐치앤슛 3점! {points}점!",
+  "{pid} 탑 스팟에서 캐치앤슛 3점! {points}점!"
+]
 
-## SHOT_3_CS (4개)
+"SCORE::SHOT_3_CS::ZONE=Corner_3::ASSIST" : [
+  "{assister_pid}의 어시스트, {pid} 코너 캐치앤슛 3점! {points}점!",
+  "{assister_pid}가 코너로 빼줍니다! {pid} 코너 3점 성공! {points}점!",
+  "{assister_pid}의 패스! {pid} 코너에서 캐치앤슛 3점 적중! {points}점!",
+  "{assister_pid}가 만들어준 코너 찬스, {pid}가 3점으로 보답! {points}점!",
+  "{assister_pid}의 도움으로 {pid} 코너 3점 캐치앤슛! {points}점!"
+]
 
-* 기본: `{pid} 캐치앤슛 3점! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid} 캐치앤슛 3점! {points}점!`
-* 존:
+"SCORE::SHOT_3_CS::ZONE=ATB_3::ASSIST" : [
+  "{assister_pid}의 어시스트, {pid} 탑 캐치앤슛 3점! {points}점!",
+  "{assister_pid}가 정면으로 건넸고 {pid}가 탑에서 3점! {points}점!",
+  "{assister_pid}의 패스에 {pid} 탑 3점 캐치앤슛 적중! {points}점!",
+  "{assister_pid}가 빼주고 {pid}가 탑에서 바로 쏩니다! 3점! {points}점!",
+  "{assister_pid}의 도움, {pid} 탑 3점 캐치앤슛 성공! {points}점!"
+]
 
-  * (Corner_3) `{pid} 코너 3점 캐치앤슛! {points}점!`
-  * (ATB_3) `{pid} 탑 3점 캐치앤슛! {points}점!`
-* 존+어시스트:
+"SCORE::SHOT_3_OD" : [
+  "{pid} 풀업 3점! 스스로 해결합니다! {points}점!",
+  "{pid} 드리블로 만들어낸 3점! {points}점!",
+  "{pid} 스텝백 3점! 대단하네요! {points}점!",
+  "{pid} 혼자서 찬스 만들고 3점 적중! {points}점!",
+  "{pid} 어려운 3점도 넣습니다! {points}점!"
+]
 
-  * (Corner_3) `{assister_pid}의 어시스트, {pid} 코너 3점 캐치앤슛! {points}점!`
-  * (ATB_3) `{assister_pid}의 어시스트, {pid} 탑 3점 캐치앤슛! {points}점!`
+"SCORE::SHOT_3_OD::ASSIST" : [
+  "{assister_pid}의 어시스트, {pid}가 드리블로 만든 3점! {points}점!",
+  "{assister_pid}가 연결했고 {pid}가 스스로 만들어 3점 성공! {points}점!",
+  "{assister_pid}의 패스 이후 {pid} 풀업 3점! {points}점!",
+  "{assister_pid}가 받아주고 {pid}가 창조한 3점! {points}점!",
+  "{assister_pid}의 도움, {pid}가 스텝백 3점으로 마무리! {points}점!"
+]
 
-## SHOT_3_OD (4개)
+"SCORE::SHOT_3_OD::ZONE=Corner_3" : [
+  "{pid} 코너에서 스스로 만들어낸 3점! {points}점!",
+  "{pid} 코너에서 드리블로 공간 만들고 3점 적중! {points}점!",
+  "{pid} 코너 스텝백 3점! {points}점!",
+  "{pid} 코너에서 어려운 3점도 해결! {points}점!",
+  "{pid} 코너에서 혼자 만들어 꽂아 넣는 3점! {points}점!"
+]
 
-* 기본: `{pid}가 스스로 만들어낸 3점! {points}점!`
-* 어시스트: `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 3점! {points}점!`
-* 존:
+"SCORE::SHOT_3_OD::ZONE=ATB_3" : [
+  "{pid} 탑에서 스스로 만들어낸 3점! {points}점!",
+  "{pid} 탑에서 드리블 풀업 3점! {points}점!",
+  "{pid} 정면 탑에서 스텝백 3점 성공! {points}점!",
+  "{pid} 탑에서 아이솔로 3점 해결! {points}점!",
+  "{pid} 탑에서 난이도 높은 3점 적중! {points}점!"
+]
 
-  * (Corner_3) `{pid}가 스스로 만들어낸 코너 3점! {points}점!`
-  * (ATB_3) `{pid}가 스스로 만들어낸 탑 3점! {points}점!`
-* 존+어시스트:
+"SCORE::SHOT_3_OD::ZONE=Corner_3::ASSIST" : [
+  "{assister_pid}의 어시스트, {pid}가 코너에서 스스로 만들어 3점! {points}점!",
+  "{assister_pid}가 코너로 연결! {pid}가 드리블로 만들고 3점 성공! {points}점!",
+  "{assister_pid}의 패스 이후 {pid} 코너에서 스텝백 3점! {points}점!",
+  "{assister_pid}가 살려줬고 {pid}가 코너에서 3점으로 해결! {points}점!",
+  "{assister_pid}의 도움, {pid} 코너에서 혼자 만들어낸 3점! {points}점!"
+]
 
-  * (Corner_3) `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 코너 3점! {points}점!`
-  * (ATB_3) `{assister_pid}의 어시스트, {pid}가 스스로 만들어낸 탑 3점! {points}점!`
+"SCORE::SHOT_3_OD::ZONE=ATB_3::ASSIST" : [
+  "{assister_pid}의 어시스트, {pid}가 탑에서 스스로 만들어 3점! {points}점!",
+  "{assister_pid}가 정면으로 연결! {pid} 탑에서 풀업 3점 적중! {points}점!",
+  "{assister_pid}의 패스 이후 {pid} 탑 스텝백 3점 성공! {points}점!",
+  "{assister_pid}가 받아줬고 {pid}가 탑에서 아이솔 3점 해결! {points}점!",
+  "{assister_pid}의 도움, {pid}가 탑에서 어려운 3점도 넣습니다! {points}점!"
+]
+
