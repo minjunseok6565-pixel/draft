@@ -1,0 +1,758 @@
+from __future__ import annotations
+
+import re
+import random
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+
+# ----------------------------
+# Utility: safe formatting
+# ----------------------------
+class _SafeDict(dict):
+    def __missing__(self, key: str) -> str:
+        # unknown placeholders remain as-is (so you notice missing keys without crashing)
+        return "{" + key + "}"
+
+
+def _clean_template(s: str) -> str:
+    s = s.strip()
+    # remove surrounding markdown code backticks
+    if s.startswith("`") and s.endswith("`") and len(s) >= 2:
+        s = s[1:-1].strip()
+    # remove surrounding Korean smart quotes
+    if s.startswith("“") and s.endswith("”") and len(s) >= 2:
+        s = s[1:-1].strip()
+    # remove surrounding straight quotes
+    if s.startswith('"') and s.endswith('"') and len(s) >= 2:
+        s = s[1:-1].strip()
+    return s
+
+
+PID_KEYS = {
+    "pid", "assister_pid", "blocker_pid", "stealer_pid", "fouler",
+    "double_doubler_pid", "defender_pid", "alt_def_pid", "doubler_pid",
+    "target_def_pid", "off_pid",
+}
+
+
+def render_template(
+    template: str,
+    event: Dict[str, Any],
+    *,
+    pid_to_name: Optional[Callable[[Any], str]] = None,
+    extra: Optional[Dict[str, Any]] = None,
+) -> str:
+    """
+    template: string containing {pid} style placeholders.
+    event: replay_event dict.
+    pid_to_name: optional mapper. If provided, PID-like fields are converted to names.
+    extra: any additional placeholders to supply/override.
+    """
+    d: Dict[str, Any] = {}
+    d.update(event)
+    if extra:
+        d.update(extra)
+
+    # map pid-like values into names (or strings)
+    if pid_to_name:
+        for k in list(d.keys()):
+            if k in PID_KEYS and d.get(k) is not None:
+                d[k] = pid_to_name(d[k])
+
+    # ensure all values are stringify-able
+    for k, v in list(d.items()):
+        if v is None:
+            continue
+        if not isinstance(v, (str, int, float)):
+            d[k] = str(v)
+
+    return template.format_map(_SafeDict(d))
+
+
+# ----------------------------
+# Parsing: score.txt
+# ----------------------------
+@dataclass
+class ScoreBucket:
+    base: List[str]
+    assist: List[str]
+    zone: Dict[str, List[str]]          # key: "_" (generic) or zone_detail like "Corner_3"
+    zone_assist: Dict[str, List[str]]   # same keys as zone
+
+    @staticmethod
+    def empty() -> "ScoreBucket":
+        return ScoreBucket(base=[], assist=[], zone={}, zone_assist={})
+
+
+def parse_score_txt(text: str) -> Dict[str, ScoreBucket]:
+    """
+    Parses your score.txt structure:
+    ## SHOT_xxx (...)
+    * 기본: `...`
+    * 어시스트: `...`
+    * 존:
+      * (Corner_3) `...`
+    * 존+어시스트:
+      * (ATB_3) `...`
+    """
+    buckets: Dict[str, ScoreBucket] = {}
+    cur_outcome: Optional[str] = None
+    mode: Optional[str] = None  # "zone" or "zone_assist"
+
+    for raw in text.splitlines():
+        line = raw.rstrip()
+
+        m = re.match(r"^\s*##\s+([A-Z0-9_]+)\s*\(", line)
+        if m:
+            cur_outcome = m.group(1).strip()
+            buckets.setdefault(cur_outcome, ScoreBucket.empty())
+            mode = None
+            continue
+
+        if not cur_outcome:
+            continue
+
+        # detect mode starts
+        if re.search(r"^\s*\*\s*존\+어시스트\s*:", line):
+            mode = "zone_assist"
+            continue
+        if re.search(r"^\s*\*\s*존\s*:", line):
+            mode = "zone"
+            continue
+
+        # base / assist
+        m = re.match(r"^\s*\*\s*기본\s*:\s*(.+)$", line)
+        if m:
+            buckets[cur_outcome].base.append(_clean_template(m.group(1)))
+            mode = None
+            continue
+
+        m = re.match(r"^\s*\*\s*어시스트\s*:\s*(.+)$", line)
+        if m:
+            buckets[cur_outcome].assist.append(_clean_template(m.group(1)))
+            mode = None
+            continue
+
+        # zone / zone_assist lines with (Corner_3) tags
+        if mode in ("zone", "zone_assist"):
+            m = re.match(r"^\s*\*\s*\(([^)]+)\)\s*(.+)$", line)
+            if m:
+                zone_key = m.group(1).strip()
+                tmpl = _clean_template(m.group(2))
+                target = buckets[cur_outcome].zone if mode == "zone" else buckets[cur_outcome].zone_assist
+                target.setdefault(zone_key, []).append(tmpl)
+                continue
+
+            # generic zone wording (MID shots in your file are just "존:" without (Corner_3))
+            # In your file those are not in (tag) form, they are just "* 존: `{pid} 미드레인지에서...`"
+            # but you implemented them as "* 존:" then no tagged lines. So we also accept:
+            m = re.match(r"^\s*\*\s*(.+)$", line)
+            if m and "{pid}" in m.group(1):
+                tmpl = _clean_template(m.group(1))
+                target = buckets[cur_outcome].zone if mode == "zone" else buckets[cur_outcome].zone_assist
+                target.setdefault("_", []).append(tmpl)
+
+    return buckets
+
+
+# ----------------------------
+# Parsing: miss&rebound.txt
+# ----------------------------
+MissKind = str  # "MISS" | "BLOCK_INPLAY" | "BLOCK_OOB"
+ZoneMention = str  # "Z" | "NZ" | "ANY"
+
+
+@dataclass
+class MissBucket:
+    # outcome -> zone_detail (None or "Corner_3"/"ATB_3") -> miss_kind -> zone_mention -> templates
+    data: Dict[str, Dict[Optional[str], Dict[MissKind, Dict[ZoneMention, List[str]]]]]
+    reb_orb: List[str]
+    reb_drb: List[str]
+
+    @staticmethod
+    def empty() -> "MissBucket":
+        return MissBucket(data={}, reb_orb=[], reb_drb=[])
+
+
+def parse_miss_rebound_txt(text: str) -> MissBucket:
+    """
+    Parses your miss&rebound.txt structure:
+    ### SHOT_xxx (2점)
+      **일반 MISS**
+      `...`
+      **인플레이 BLOCK**
+      `...`
+      **데드볼 BLOCK(OOB)**
+      `...`
+
+    For MID/3 sections:
+      * [존 포함] ...
+      * [존 미포함] ...
+
+    Also captures the two rebound lines at the bottom:
+      {pid} 가 수비 리바운드를...
+      {pid} 가 공격 리바운드를...
+    """
+    bucket = MissBucket.empty()
+
+    cur_outcome: Optional[str] = None
+    cur_zone: Optional[str] = None
+    cur_kind: Optional[MissKind] = None
+
+    def _ensure():
+        assert cur_outcome is not None
+        bucket.data.setdefault(cur_outcome, {})
+        bucket.data[cur_outcome].setdefault(cur_zone, {})
+        bucket.data[cur_outcome][cur_zone].setdefault("MISS", {})
+        bucket.data[cur_outcome][cur_zone].setdefault("BLOCK_INPLAY", {})
+        bucket.data[cur_outcome][cur_zone].setdefault("BLOCK_OOB", {})
+
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+
+        # section header: ### SHOT_3_CS (3점) — Corner_3
+        m = re.match(r"^###\s+(SHOT_[A-Z0-9_]+)\s*\(", line)
+        if m:
+            cur_outcome = m.group(1).strip()
+            # zone detail in header (for 3PT sections)
+            if "Corner_3" in line:
+                cur_zone = "Corner_3"
+            elif "ATB_3" in line:
+                cur_zone = "ATB_3"
+            else:
+                cur_zone = None
+            cur_kind = None
+            _ensure()
+            continue
+
+        if not cur_outcome:
+            continue
+
+        # kind blocks
+        if line == "**일반 MISS**":
+            cur_kind = "MISS"
+            _ensure()
+            continue
+        if line == "**인플레이 BLOCK**":
+            cur_kind = "BLOCK_INPLAY"
+            _ensure()
+            continue
+        if line == "**데드볼 BLOCK(OOB)**":
+            cur_kind = "BLOCK_OOB"
+            _ensure()
+            continue
+
+        # rebound tail lines
+        if "리바운드" in line and "{pid}" in line:
+            if "공격" in line:
+                bucket.reb_orb.append(_clean_template(line))
+            elif "수비" in line:
+                bucket.reb_drb.append(_clean_template(line))
+            continue
+
+        # template lines
+        if cur_kind is None:
+            continue
+
+        # bullet with zone mention tag
+        m = re.match(r"^\*\s*\[(존 포함|존 미포함)\]\s*(.+)$", line)
+        if m:
+            zm = "Z" if m.group(1) == "존 포함" else "NZ"
+            tmpl = _clean_template(m.group(2))
+            bucket.data[cur_outcome][cur_zone][cur_kind].setdefault(zm, []).append(tmpl)
+            continue
+
+        # plain template line (RA / Paint sections usually)
+        if "{pid}" in line:
+            tmpl = _clean_template(line)
+            bucket.data[cur_outcome][cur_zone][cur_kind].setdefault("ANY", []).append(tmpl)
+
+    # If rebound lines were not found in miss&rebound.txt, keep empty (router will fallback)
+    return bucket
+
+
+# ----------------------------
+# Parsing: turnover.txt
+# ----------------------------
+@dataclass
+class TurnoverTemplates:
+    shotclock: List[str]
+    loose_steal: List[str]
+    loose_lineout: List[str]
+    loose_live: List[str]
+    badpass_steal: List[str]
+    badpass_lineout: List[str]
+    badpass_live: List[str]
+
+    @staticmethod
+    def empty() -> "TurnoverTemplates":
+        return TurnoverTemplates(
+            shotclock=[], loose_steal=[], loose_lineout=[], loose_live=[],
+            badpass_steal=[], badpass_lineout=[], badpass_live=[]
+        )
+
+
+def parse_turnover_txt(text: str) -> TurnoverTemplates:
+    """
+    Parses your label: “...” lines and maps them into canonical buckets.
+    """
+    tt = TurnoverTemplates.empty()
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        # label: “template”
+        if ":" not in line:
+            continue
+        label, rest = line.split(":", 1)
+        tmpl = _clean_template(rest.strip())
+
+        lab = label.strip()
+
+        if lab.startswith("샷클락 턴오버"):
+            tt.shotclock.append(tmpl)
+        elif lab.startswith("루즈볼 턴오버(스틸당함)"):
+            tt.loose_steal.append(tmpl)
+        elif lab.startswith("루즈볼 라인아웃 턴오버"):
+            tt.loose_lineout.append(tmpl)
+        elif lab.startswith("루즈볼 턴오버"):
+            tt.loose_live.append(tmpl)
+        elif lab.startswith("패스미스 턴오버 (스틸당함)"):
+            tt.badpass_steal.append(tmpl)
+        elif lab.startswith("패스미스 턴오버 (공이 바깥으로 나감)"):
+            tt.badpass_lineout.append(tmpl)
+        elif lab.startswith("패스미스 턴오버"):
+            tt.badpass_live.append(tmpl)
+    return tt
+
+
+# ----------------------------
+# Parsing: shooting foul.txt
+# ----------------------------
+@dataclass
+class FoulFTBucket:
+    and1: List[str]
+    twoft: List[str]
+    threeft: List[str]
+
+    @staticmethod
+    def empty() -> "FoulFTBucket":
+        return FoulFTBucket(and1=[], twoft=[], threeft=[])
+
+
+@dataclass
+class ShootingFoulTemplates:
+    by_shot_key: Dict[str, FoulFTBucket]
+    bonus: List[str]
+
+    @staticmethod
+    def empty() -> "ShootingFoulTemplates":
+        return ShootingFoulTemplates(by_shot_key={}, bonus=[])
+
+
+def parse_shooting_foul_txt(text: str) -> ShootingFoulTemplates:
+    """
+    Parses your shooting foul file:
+    SHOT_RIM_DUNK
+      앤드원: “...”
+      투샷: “...”
+    SHOT_3_CS
+      앤드원: “...”
+      3샷: “...”
+    ... + 마지막에 보너스 문장 한 줄
+    """
+    sf = ShootingFoulTemplates.empty()
+    cur_key: Optional[str] = None
+
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+
+        # bonus standalone line
+        if line.startswith("“보너스") or line.startswith('"보너스'):
+            sf.bonus.append(_clean_template(line))
+            continue
+
+        # shot_key header (all caps with underscores)
+        if re.fullmatch(r"SHOT_[A-Z0-9_]+", line):
+            cur_key = line
+            sf.by_shot_key.setdefault(cur_key, FoulFTBucket.empty())
+            continue
+
+        if cur_key:
+            m = re.match(r"^(앤드원|투샷|3샷)\s*:\s*(.+)$", line)
+            if m:
+                kind = m.group(1)
+                tmpl = _clean_template(m.group(2))
+                b = sf.by_shot_key[cur_key]
+                if kind == "앤드원":
+                    b.and1.append(tmpl)
+                elif kind == "투샷":
+                    b.twoft.append(tmpl)
+                else:
+                    b.threeft.append(tmpl)
+
+    return sf
+
+
+# ----------------------------
+# Router
+# ----------------------------
+@dataclass
+class RouterConfig:
+    p_mention_assist: float = 0.70   # if assisted, probability to choose assist bucket
+    p_mention_zone: float = 0.50     # MID/3: probability to choose zone-mention wording
+    seed: Optional[int] = None
+
+
+class CommentaryRouter:
+    """
+    Loads templates from your current txt layout and routes replay_events deterministically
+    into the correct template bucket.
+    """
+
+    def __init__(
+        self,
+        template_dir: str | Path,
+        *,
+        config: Optional[RouterConfig] = None,
+    ):
+        self.dir = Path(template_dir)
+        self.cfg = config or RouterConfig()
+        self.rng = random.Random(self.cfg.seed)
+
+        # Load & parse
+        self.score = parse_score_txt((self.dir / "score.txt").read_text(encoding="utf-8"))
+        self.miss = parse_miss_rebound_txt((self.dir / "miss&rebound.txt").read_text(encoding="utf-8"))
+        self.turnover = parse_turnover_txt((self.dir / "turnover.txt").read_text(encoding="utf-8"))
+        self.shooting_foul = parse_shooting_foul_txt((self.dir / "shooting foul.txt").read_text(encoding="utf-8"))
+
+        self.offensive_foul_lines = self._read_single_line(self.dir / "offensivefoul.txt")
+        self.def_noshot_lines = self._read_single_line(self.dir / "defensivefoul(noshot).txt")
+
+    @staticmethod
+    def _read_single_line(path: Path) -> List[str]:
+        txt = path.read_text(encoding="utf-8").strip()
+        # allow multiple lines in the future
+        lines = [_clean_template(x.strip()) for x in txt.splitlines() if x.strip()]
+        return lines
+
+    def _choice(self, xs: List[str]) -> Optional[str]:
+        if not xs:
+            return None
+        return self.rng.choice(xs)
+
+    # ----------------------------
+    # "Routing fixed" functions
+    # ----------------------------
+    def route_group(self, event: Dict[str, Any], next_event: Optional[Dict[str, Any]] = None) -> str:
+        """
+        Returns a stable group key describing the chosen bucket.
+        (You can log this to verify routing coverage.)
+        """
+        et = event.get("event_type")
+
+        if et == "SCORE":
+            outcome = event.get("outcome")
+            assisted = bool(event.get("assisted")) and event.get("assister_pid") is not None
+            z = event.get("shot_zone_detail")
+            if outcome in ("SHOT_3_CS", "SHOT_3_OD"):
+                # 3pt has zone detail Corner_3 / ATB_3
+                zone_key = z if z in ("Corner_3", "ATB_3") else "_"
+                # group is decided by: outcome + (zone mention?) + (assist mention?)
+                # (zone mention can be probabilistic but "rule" is fixed in code)
+                mention_zone = (self.rng.random() < self.cfg.p_mention_zone)
+                mention_assist = assisted and (self.rng.random() < self.cfg.p_mention_assist)
+                return f"SCORE::{outcome}::ZONE={zone_key if mention_zone else 'NO'}::ASSIST={mention_assist}"
+            else:
+                mention_zone = outcome in ("SHOT_MID_PU", "SHOT_MID_CS") and (self.rng.random() < self.cfg.p_mention_zone)
+                mention_assist = assisted and (self.rng.random() < self.cfg.p_mention_assist)
+                return f"SCORE::{outcome}::ZONE={'YES' if mention_zone else 'NO'}::ASSIST={mention_assist}"
+
+        if et == "MISS":
+            outcome = event.get("outcome")
+            blocked = bool(event.get("blocked")) and event.get("blocker_pid") is not None
+            deadball = event.get("deadball_reason") == "BLOCK_OOB"
+            kind = "MISS"
+            if blocked and deadball:
+                kind = "BLOCK_OOB"
+            elif blocked:
+                kind = "BLOCK_INPLAY"
+
+            z = event.get("shot_zone_detail")
+            zone_key = None
+            if outcome in ("SHOT_3_CS", "SHOT_3_OD"):
+                zone_key = z if z in ("Corner_3", "ATB_3") else None
+
+            # for MID/3, choose zone mention variant Z/NZ
+            zm = "ANY"
+            if outcome in ("SHOT_MID_PU", "SHOT_MID_CS", "SHOT_3_CS", "SHOT_3_OD"):
+                zm = "Z" if (self.rng.random() < self.cfg.p_mention_zone) else "NZ"
+
+            return f"MISS::{outcome}::ZONE={zone_key}::KIND={kind}::ZM={zm}"
+
+        if et == "REB":
+            return f"REB::{event.get('outcome')}"
+
+        if et == "TURNOVER":
+            outcome = event.get("outcome")
+            if outcome == "TO_SHOT_CLOCK":
+                return "TO::TO_SHOT_CLOCK"
+            if outcome == "TO_HANDLE_LOSS":
+                if bool(event.get("steal")) and event.get("stealer_pid") is not None:
+                    return "TO::TO_HANDLE_LOSS::STEAL"
+                if bool(event.get("deadball_override")) and event.get("tov_deadball_reason") == "LINEOUT_LOOSE":
+                    return "TO::TO_HANDLE_LOSS::LINEOUT_LOOSE"
+                return "TO::TO_HANDLE_LOSS::LIVE"
+            if outcome == "TO_BAD_PASS":
+                if bool(event.get("steal")) and event.get("stealer_pid") is not None:
+                    return "TO::TO_BAD_PASS::STEAL"
+                if bool(event.get("deadball_override")) and event.get("tov_deadball_reason") == "LINEOUT_BAD_PASS":
+                    return "TO::TO_BAD_PASS::LINEOUT_BAD_PASS"
+                return "TO::TO_BAD_PASS::LIVE"
+            return f"TO::{outcome}"
+
+        if et == "OFFENSIVE_FOUL":
+            return "OFF_FOUL::CHARGE"
+
+        if et == "FOUL_NO_SHOTS":
+            return f"DEF_FOUL_NO_SHOTS::{event.get('outcome')}"
+
+        if et == "FOUL_FT":
+            if bool(event.get("bonus")):
+                return "FT::BONUS"
+            shot_key = event.get("shot_key")
+            and1 = bool(event.get("and_one")) or (bool(event.get("shot_made")) and int(event.get("nfts", 0)) == 1)
+            if and1:
+                return f"FT::{shot_key}::AND1"
+            if int(event.get("nfts", 0)) == 3:
+                return f"FT::{shot_key}::3FT"
+            return f"FT::{shot_key}::2FT"
+
+        return f"UNHANDLED::{et}"
+
+    # ----------------------------
+    # Pick final line
+    # ----------------------------
+    def pick_commentary(
+        self,
+        event: Dict[str, Any],
+        *,
+        next_event: Optional[Dict[str, Any]] = None,
+        pid_to_name: Optional[Callable[[Any], str]] = None,
+    ) -> Optional[str]:
+        """
+        Returns one commentary line for the event.
+        If you want MISS+REB bundling, call this with next_event=the immediate next replay event.
+        """
+        et = event.get("event_type")
+
+        if et == "SCORE":
+            return self._pick_score(event, pid_to_name=pid_to_name)
+
+        if et == "MISS":
+            return self._pick_miss(event, pid_to_name=pid_to_name)
+
+        if et == "REB":
+            return self._pick_reb(event, pid_to_name=pid_to_name)
+
+        if et == "TURNOVER":
+            return self._pick_turnover(event, pid_to_name=pid_to_name)
+
+        if et == "OFFENSIVE_FOUL":
+            tmpl = self._choice(self.offensive_foul_lines)
+            return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+        if et == "FOUL_NO_SHOTS":
+            tmpl = self._choice(self.def_noshot_lines)
+            return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+        if et == "FOUL_FT":
+            return self._pick_foul_ft(event, pid_to_name=pid_to_name)
+
+        return None
+
+    # ----------------------------
+    # event-specific pickers
+    # ----------------------------
+    def _pick_score(self, event: Dict[str, Any], *, pid_to_name=None) -> Optional[str]:
+        outcome = event.get("outcome")
+        if outcome not in self.score:
+            return None
+
+        b = self.score[outcome]
+        assisted = bool(event.get("assisted")) and event.get("assister_pid") is not None
+        mention_assist = assisted and (self.rng.random() < self.cfg.p_mention_assist)
+
+        z = event.get("shot_zone_detail")
+        if outcome in ("SHOT_3_CS", "SHOT_3_OD"):
+            # 3PT zone-specific lines exist
+            mention_zone = (self.rng.random() < self.cfg.p_mention_zone)
+            zone_key = z if z in ("Corner_3", "ATB_3") else "_"
+
+            if mention_zone and mention_assist:
+                xs = b.zone_assist.get(zone_key) or b.zone_assist.get("_") or b.assist or b.base
+            elif mention_zone:
+                xs = b.zone.get(zone_key) or b.zone.get("_") or b.base
+            elif mention_assist:
+                xs = b.assist or b.base
+            else:
+                xs = b.base
+
+            tmpl = self._choice(xs)
+            return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+        # MID: zone wording is generic (stored under "_" if you later add)
+        mention_zone = outcome in ("SHOT_MID_PU", "SHOT_MID_CS") and (self.rng.random() < self.cfg.p_mention_zone)
+
+        if mention_zone and mention_assist:
+            xs = b.zone_assist.get("_") or b.assist or b.base
+        elif mention_zone:
+            xs = b.zone.get("_") or b.base
+        elif mention_assist:
+            xs = b.assist or b.base
+        else:
+            xs = b.base
+
+        tmpl = self._choice(xs)
+        return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+    def _pick_miss(self, event: Dict[str, Any], *, pid_to_name=None) -> Optional[str]:
+        outcome = event.get("outcome")
+        if outcome not in self.miss.data:
+            return None
+
+        blocked = bool(event.get("blocked")) and event.get("blocker_pid") is not None
+        deadball = (event.get("deadball_reason") == "BLOCK_OOB")
+
+        if blocked and deadball:
+            kind = "BLOCK_OOB"
+        elif blocked:
+            kind = "BLOCK_INPLAY"
+        else:
+            kind = "MISS"
+
+        z = event.get("shot_zone_detail")
+        zone_key: Optional[str] = None
+        if outcome in ("SHOT_3_CS", "SHOT_3_OD"):
+            zone_key = z if z in ("Corner_3", "ATB_3") else None
+
+        zone_map = self.miss.data[outcome]
+        # prefer specific zone bucket if it exists (3PT), else fallback to None bucket
+        by_zone = zone_map.get(zone_key) or zone_map.get(None)
+        if not by_zone:
+            return None
+
+        by_kind = by_zone.get(kind)
+        if not by_kind:
+            return None
+
+        # decide zone mention variant for MID/3
+        if outcome in ("SHOT_MID_PU", "SHOT_MID_CS", "SHOT_3_CS", "SHOT_3_OD"):
+            zm = "Z" if (self.rng.random() < self.cfg.p_mention_zone) else "NZ"
+            xs = by_kind.get(zm) or by_kind.get("ANY") or []
+        else:
+            xs = by_kind.get("ANY") or []
+
+        tmpl = self._choice(xs)
+        return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+    def _pick_reb(self, event: Dict[str, Any], *, pid_to_name=None) -> Optional[str]:
+        out = event.get("outcome")
+        if out == "ORB":
+            xs = self.miss.reb_orb
+        else:
+            xs = self.miss.reb_drb
+
+        # fallback if miss&rebound.txt didn't contain rebound lines
+        if not xs:
+            # very safe generic
+            generic = "{pid} 리바운드!"
+            return render_template(generic, event, pid_to_name=pid_to_name)
+
+        tmpl = self._choice(xs)
+        return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+    def _pick_turnover(self, event: Dict[str, Any], *, pid_to_name=None) -> Optional[str]:
+        outcome = event.get("outcome")
+
+        # canonical routing fixed here
+        if outcome == "TO_SHOT_CLOCK":
+            tmpl = self._choice(self.turnover.shotclock)
+        elif outcome == "TO_HANDLE_LOSS":
+            if bool(event.get("steal")) and event.get("stealer_pid") is not None:
+                tmpl = self._choice(self.turnover.loose_steal)
+            elif bool(event.get("deadball_override")) and event.get("tov_deadball_reason") == "LINEOUT_LOOSE":
+                tmpl = self._choice(self.turnover.loose_lineout)
+            else:
+                tmpl = self._choice(self.turnover.loose_live)
+        elif outcome == "TO_BAD_PASS":
+            if bool(event.get("steal")) and event.get("stealer_pid") is not None:
+                tmpl = self._choice(self.turnover.badpass_steal)
+            elif bool(event.get("deadball_override")) and event.get("tov_deadball_reason") == "LINEOUT_BAD_PASS":
+                tmpl = self._choice(self.turnover.badpass_lineout)
+            else:
+                tmpl = self._choice(self.turnover.badpass_live)
+        else:
+            # unknown turnover outcome (future-proof)
+            tmpl = None
+
+        return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+    def _pick_foul_ft(self, event: Dict[str, Any], *, pid_to_name=None) -> Optional[str]:
+        # bonus bucket
+        if bool(event.get("bonus")):
+            tmpl = self._choice(self.shooting_foul.bonus)
+            return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+        shot_key = event.get("shot_key")
+        if not shot_key:
+            return None
+
+        b = self.shooting_foul.by_shot_key.get(shot_key)
+        if not b:
+            return None
+
+        and1 = bool(event.get("and_one")) or (bool(event.get("shot_made")) and int(event.get("nfts", 0)) == 1)
+        if and1:
+            tmpl = self._choice(b.and1)
+        else:
+            nfts = int(event.get("nfts", 0))
+            if nfts == 3:
+                tmpl = self._choice(b.threeft) or self._choice(b.twoft)
+            else:
+                tmpl = self._choice(b.twoft)
+
+        return render_template(tmpl, event, pid_to_name=pid_to_name) if tmpl else None
+
+
+# ----------------------------
+# Example usage
+# ----------------------------
+if __name__ == "__main__":
+    router = CommentaryRouter(
+        template_dir="path/to/your/templates",
+        config=RouterConfig(p_mention_assist=0.75, p_mention_zone=0.55, seed=42),
+    )
+
+    # example event (as your replay_event dict)
+    ev = {
+        "event_type": "MISS",
+        "outcome": "SHOT_3_CS",
+        "pid": 101,
+        "blocked": True,
+        "blocker_pid": 202,
+        "deadball_reason": "BLOCK_OOB",
+        "shot_zone_detail": "Corner_3",
+    }
+
+    def pid_to_name(pid: Any) -> str:
+        return f"Player#{pid}"
+
+    print("GROUP:", router.route_group(ev))
+    print("TEXT :", router.pick_commentary(ev, pid_to_name=pid_to_name))
