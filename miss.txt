@@ -7,6 +7,46 @@
 
 ---
 
+A. 림 근처 (Restricted_Area) — 존 언급 없음
+SHOT_RIM_DUNK (2점)
+
+일반 MISS: {shooter}의 덩크 시도! 림을 때리고 튕겨 나옵니다!
+
+인플레이 BLOCK: {shooter} 덩크로 올라갑니다! {blocker}가 위에서 쳐내며 블록! 공은 살아있습니다!
+
+데드볼 BLOCK(OOB): {shooter} 덩크 시도! {blocker}가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
+
+SHOT_RIM_LAYUP (2점)
+
+일반 MISS: {shooter}의 레이업! 살짝 빗나갑니다!
+
+인플레이 BLOCK: {shooter} 레이업으로 마무리! {blocker}가 손끝으로 쳐내며 블록! 인플레이!
+
+데드볼 BLOCK(OOB): {shooter} 레이업 시도! {blocker}가 막아냈고 공이 밖으로! 데드볼!
+
+SHOT_RIM_CONTACT (2점)
+
+일반 MISS: {shooter} 접촉을 버티고 올렸지만 마무리가 안 됩니다!
+
+인플레이 BLOCK: {shooter} 몸싸움 속 슛! {blocker}가 끝까지 따라와 블록! 공은 인플레이!
+
+데드볼 BLOCK(OOB): {shooter} 컨택 속 마무리! {blocker}가 쳐냈고 아웃 오브 바운즈! 데드볼입니다!
+
+B. 페인트 비-RA (Paint_Non_RA) — 존 언급 없음
+SHOT_TOUCH_FLOATER (2점)
+
+일반 MISS: {shooter}의 플로터! 터치가 조금 길었습니다!
+
+인플레이 BLOCK: {shooter} 플로터로 띄웁니다! {blocker}가 손끝으로 쳐내요! 공은 살아있어요!
+
+데드볼 BLOCK(OOB): {shooter} 플로터 시도! {blocker}가 쳐냈고 공이 밖으로! 데드볼!
+
+SHOT_POST (2점)
+
+일반 MISS: {shooter} 포스트에서 돌아서 마무리! 림이 허락하지 않네요!
+
+인플레이 BLOCK: {shooter} 포스트 슛으로 마무리! {blocker}가 위에서 찍어 눌러 블록! 인플레이!
+
 ## C. 미드레인지 (Mid_Range)
 
 ### SHOT_MID_PU (2점)
