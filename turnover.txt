@@ -4,7 +4,7 @@ TO::TO_SHOT_CLOCK (5)
 "TO::TO_SHOT_CLOCK" : "샷클락 제로! {handler}가 마무리를 못 하고 공격권이 넘어가요!"
 "TO::TO_SHOT_CLOCK" : "늦었어요! {handler}가 타이밍을 놓치며 샷클락 바이올레이션!"
 "TO::TO_SHOT_CLOCK" : "24초가 다 됐습니다—{handler}의 공격이 무산됩니다!"
-"TO::TO_SHOT_CLOCK" : "버저가 먼저 울렸네요! {handler}가 시간을 못 맞추며 턴오버!"
+"TO::TO_SHOT_CLOCK" : "급하게 던졌지만 버저가 먼저 울렸네요! {handler}가 시간을 못 맞추며 턴오버!"
 
 TO::TO_HANDLE_LOSS::STEAL (5)
 
@@ -35,7 +35,7 @@ TO::TO_BAD_PASS::STEAL (5)
 "TO::TO_BAD_PASS::STEAL" : "{passer}의 패스가 너무 뻔했어요! {stealer}가 스틸로 끊어냅니다!"
 "TO::TO_BAD_PASS::STEAL" : "패스 길이 막혔습니다—{stealer}가 읽고 가로채요! ({passer} 패스 미스)"
 "TO::TO_BAD_PASS::STEAL" : "{passer}가 던졌는데, {stealer}가 한 박자 먼저 낚아챘습니다!"
-"TO::TO_BAD_PASS::STEAL" : "위험한 패스였어요! {stealer}가 끊어내며 턴오버 유도!"
+"TO::TO_BAD_PASS::STEAL" : "위험한 패스였어요! {stealer}가 끊어내며 턴오버!"
 "TO::TO_BAD_PASS::STEAL" : "{passer}의 패스가 걸렸습니다! {stealer}가 가로채며 분위기 반전!"
 
 TO::TO_BAD_PASS::LINEOUT_BAD_PASS (5)
@@ -48,10 +48,10 @@ TO::TO_BAD_PASS::LINEOUT_BAD_PASS (5)
 
 TO::TO_BAD_PASS::LIVE (5)
 
-"TO::TO_BAD_PASS::LIVE" : "{passer}의 패스가 빗나갑니다! 상대가 잡아채며 라이브 볼 턴오버!"
-"TO::TO_BAD_PASS::LIVE" : "연결이 안 됐어요—{passer}의 패스 미스, 상대가 회수합니다!"
-"TO::TO_BAD_PASS::LIVE" : "{passer}가 던진 공이 떠버렸고, 상대가 주워 담아요!"
-"TO::TO_BAD_PASS::LIVE" : "패스가 어긋나며 공이 살아있습니다! 상대가 바로 가져갑니다!"
+"TO::TO_BAD_PASS::LIVE" : "{passer}의 패스가 빗나갑니다! 상대가 낚아채며 턴오버!"
+"TO::TO_BAD_PASS::LIVE" : "연결이 안 됐어요—{passer}의 패스 미스, 공격권을 헌납하고 맙니다!"
+"TO::TO_BAD_PASS::LIVE" : "{passer}가 던진 공이 떠버렸고, 상대가 가로챘어요!"
+"TO::TO_BAD_PASS::LIVE" : "패스가 어긋납니다! 상대가 바로 가져서 공격을 전개하는데요!"
 "TO::TO_BAD_PASS::LIVE" : "{passer}의 실책성 패스! 상대에게 바로 넘어가면서 공격 전환!"
 
 TO::TO_CHARGE (5)
